@@ -14,8 +14,7 @@ use Doctrine\Common\Collections\Collection;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Ramsey\Uuid\Doctrine\UuidGenerator;
-use Ramsey\Uuid\UuidInterface;
+
 
 use Symfony\Component\Serializer\Annotation\Groups;
 
@@ -61,17 +60,8 @@ class Habitat
 
 
 
-    public function getId(): ?UuidInterface
-    {
-        return $this->id;
-    }
 
-    public function setId(string $id): static
-    {
-        $this->id = $id;
 
-        return $this;
-    }
 
     public function getName(): ?string
     {
