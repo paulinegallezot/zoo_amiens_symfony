@@ -40,7 +40,7 @@ class GlobalBeforeSaveListener implements EventSubscriber
 
             $name = $entity->getName();
             if ($name ) { //&& !$slug
-                $entity->setSlug($this->generateSlug($name,$entityClassName));
+                $entity->setSlug($this->generateSlug($entity,$entityClassName));
             }
         }
 
@@ -106,20 +106,21 @@ class GlobalBeforeSaveListener implements EventSubscriber
         $this->prePersist($args);
     }
 
-    private function generateSlug(string $name,string $entityClassName): string
+    private function generateSlug($entity,string $entityClassName): string
     {
-        $baseSlug = $this->slugger->slug($name)->lower()->toString();
+        $baseSlug = $this->slugger->slug($entity->getName())->lower()->toString();
 
         // Récupérer le nom de l'entité
         $entityMetadata = $this->entityManager->getClassMetadata($entityClassName);
         $entityName = $entityMetadata->getName();
+
 
         // Vérifier si le slug de base existe déjà dans la base de données pour cette entité
         $repository = $this->entityManager->getRepository($entityName);
         $existingSlug = $repository->findOneBy(['slug' => $baseSlug]);
 
         // Si le slug existe déjà, ajouter un timestamp pour le rendre unique
-        if ($existingSlug) {
+        if ($existingSlug && $existingSlug->getId() !== $entity->getId() ){
             $timestamp = time();
             $uniqueSlug = $baseSlug . '-' . $timestamp;
         } else {
