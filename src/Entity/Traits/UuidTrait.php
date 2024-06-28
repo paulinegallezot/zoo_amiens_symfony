@@ -7,7 +7,7 @@ use Symfony\Component\Uid\Uuid;
 
 trait UuidTrait
 {
-    #[Groups(["api"])]
+    #[Groups(["default"])]
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'CUSTOM')]
     #[ORM\CustomIdGenerator(class: 'doctrine.uuid_generator')]
