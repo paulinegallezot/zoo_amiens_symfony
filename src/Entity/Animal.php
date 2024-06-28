@@ -18,7 +18,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[AllowDynamicProperties] #[ORM\Entity(repositoryClass: AnimalRepository::class)]
-#[UniqueEntity('name', message: 'Ce prénom est déjà utilisé. Veuillez en choisir un autre.')]
+#[ORM\HasLifecycleCallbacks]
+#[UniqueEntity('name', message: 'Ce nom est déjà utilisé. Veuillez en choisir un autre.')]
 class Animal
 {
     use UuidTrait;

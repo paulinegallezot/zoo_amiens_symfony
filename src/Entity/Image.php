@@ -8,9 +8,10 @@ use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Uid\Uuid;
 use Symfony\Component\Serializer\Annotation\Groups;
-#[ORM\Entity(repositoryClass: ImageRepository::class)]
-#[ORM\InheritanceType("SINGLE_TABLE")]
 
+#[ORM\Entity(repositoryClass: ImageRepository::class)]
+#[ORM\HasLifecycleCallbacks]
+#[ORM\InheritanceType("SINGLE_TABLE")]
 #[ORM\DiscriminatorColumn(name: "entity_type", type: "string")]
 #[ORM\DiscriminatorMap([
   "animal" => "AnimalImage",

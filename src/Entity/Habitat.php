@@ -20,6 +20,7 @@ use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: HabitatRepository::class)]
+#[ORM\HasLifecycleCallbacks]
 class Habitat
 {
     use UuidTrait;
