@@ -4,8 +4,69 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
-  images_directory: '%kernel.project_dir%/public/images'
+    images_directory: '%kernel.project_dir%/public/images'
+
+    KT_THEME: 'metronic'
+
+  # Theme layout templates directory
+
+    KT_THEME_LAYOUT_DIR: 'metronic/layout'
+
+  # Theme Mode
+  # Value: light | dark | system
+
+    KT_THEME_MODE_DEFAULT: 'light'
+    KT_THEME_MODE_SWITCH_ENABLED: true
+
+
+  # Theme Direction
+  # Value: ltr | rtl
+
+    KT_THEME_DIRECTION: 'ltr'
+
+
+  # Keenicons
+  # Value: duotone | outline | bold
+
+    KT_THEME_ICONS: 'duotone'
+
+
+  # Theme Assets
+    KT_THEME_ASSETS.favicon: "media/logos/favicon.ico"
+    KT_THEME_ASSETS.fonts: [
+      'https://fonts.googleapis.com/css?family=Inter:300,400,500,600,700',
+    ]
+    KT_THEME_ASSETS.css: [
+      "plugins/global/plugins.bundle.css",
+      "css/style.bundle.css",
+      "css/custom.css"
+    ]
+    KT_THEME_ASSETS.js: [
+      "plugins/global/plugins.bundle.js",
+      "js/scripts.bundle.js",
+    ]
+    KT_THEME_VENDORS:
+      "datatables": {
+        "css": [
+          "plugins/custom/datatables/datatables.bundle.css"
+        ],
+        "js": [
+          "plugins/custom/datatables/datatables.bundle.js"
+        ]
+      }
+
 services:
+
+    App\Twig\AppExtension:
+      arguments:
+        $requestStack: '@request_stack'
+      tags:
+        - { name: twig.extension }
+
+    App\Service\RepositoryHelper:
+      arguments:
+        $entityManager: '@doctrine.orm.entity_manager'
+
     # default configuration for services in *this* file
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.

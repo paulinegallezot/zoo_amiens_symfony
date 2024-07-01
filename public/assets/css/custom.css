@@ -1,0 +1,27 @@
+.input-container {
+    position: relative;
+    display: inline-block;
+}
+
+.input-container input {
+
+    width: 100%;
+    box-sizing: border-box;
+    vertical-align: bottom; /* Aligne le texte de l'input en bas */
+}
+
+.input-text {
+    position: absolute;
+    right: 1px; /* Ajustez cette valeur pour l'espacement à droite */
+    bottom: 1px; /* Ajustez cette valeur pour l'espacement en bas */
+    font-size: 0.80em; /* Taille plus petite pour le texte d'aide */
+    color: #666; /* Couleur du texte d'aide */
+    pointer-events: none; /* Empêche le texte d'interférer avec les clics dans l'input */
+    line-height: 1; /* Pour s'assurer que le texte est bien aligné */
+}
+
+[id^="report_reportFoods_"] {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+}
