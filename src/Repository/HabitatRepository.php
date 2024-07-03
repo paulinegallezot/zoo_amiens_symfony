@@ -16,14 +16,18 @@ class HabitatRepository extends ServiceEntityRepository
 {
     private RepositoryHelper $repositoryHelper;
 
+    // on n'utilise pas le trait FindInDatatableTrait car il y a des images
+
+
     public function __construct(ManagerRegistry $registry,RepositoryHelper $repositoryHelper)
     {
         parent::__construct($registry, Habitat::class);
         $this->repositoryHelper = $repositoryHelper;
     }
-    public function findForDatatable($query)
+    public function findInDatatable($query)
     {
         $qb = $this->createQueryBuilder('a');
+
         $qb->select('a');
 
         $this->repositoryHelper->init($qb,$query);

@@ -6,7 +6,8 @@ use App\Entity\Traits\DateTrait;
 use App\Entity\Traits\UuidTrait;
 use App\Repository\ImageRepository;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Uid\Uuid;
+use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\UuidInterface;
 use Symfony\Component\Serializer\Annotation\Groups;
 
 #[ORM\Entity(repositoryClass: ImageRepository::class)]
@@ -34,9 +35,9 @@ abstract class Image
 
 
     #[ORM\Column(type: 'uuid',nullable: true)]
-    private ?Uuid $entityId = null;
+    private ?UuidInterface $entityId = null;
 
-    public function getEntityId(): ?Uuid
+    public function getEntityId(): ?UuidInterface
     {
         return $this->entityId;
     }
@@ -46,11 +47,6 @@ abstract class Image
 
         $this->entityId = Uuid::fromString($entityId);
         return $this;
-    }
-
-    public function getId(): ?Uuid
-    {
-        return $this->id;
     }
 
     public function getFilename(): ?string
