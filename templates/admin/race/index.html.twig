@@ -33,11 +33,8 @@
 {% block javascripts_embed %}
     <script>
         let jsCustomConfig = {{ jsCustomConfig | json_encode | raw }};
-
         KTUtil.onDOMContentLoaded(function () {
-
-            KTDatatablesServerSide.init();
-            DeleteItem.init();
+            initDatatable();
         });
     </script>
 {% endblock %}

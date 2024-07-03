@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    {{ form_widget(form) }}
+<div class="d-flex justify-content-end">
+    <button class="btn btn-primary m-1" name="save_and_exit">{{ button_save_and_exit|default('Sauvegarder et quitter') }}</button>
+    {% if button_save_and_continue is defined and button_save_and_continue is not empty %}
+        <button class="btn btn-secondary m-1" name="save_and_continue">{{ button_save_and_continue }}</button>
+    {% endif %}
+    <a href="{{ path('app_admin_race') }}" class="btn btn-secondary m-1">Retour</a>
+</div>
+{{ form_end(form) }}
