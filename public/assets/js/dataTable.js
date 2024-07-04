@@ -48,9 +48,20 @@ var KTDatatablesServerSide = function () {
             ajax: {
                 url: jsCustomConfig.datatableUrl,
                 data: function (d) {
-                    d.filtermatch = {};
+
                     const search = $('[data-kt-docs-table-filter="search"]').val();
                     d.search.value = search;
+
+                    // Ajout des filtres dynamiques
+                    if (config.filtermatch) {
+                        d.filtermatch = {};
+                        for (const [key, selector] of Object.entries(config.filtermatch)) {
+                            const value = $(selector).find(':selected').val();
+                            if (value) {
+                                d.filtermatch[key] = value;
+                            }
+                        }
+                    }
                 }
             },
             columns: config.columns,

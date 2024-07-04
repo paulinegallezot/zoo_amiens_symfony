@@ -26,15 +26,8 @@ class AnimalRepository extends ServiceEntityRepository
         $this->repositoryHelper = $repositoryHelper;
     }
 
-    public function findAllSortedByName()
-    {
-        return $this->createQueryBuilder('a')
-            ->orderBy('a.name', 'ASC')
-            ->getQuery()
-            ->getResult();
-    }
 
-    public function findForDatatable($query)
+    public function findInDatatable($query)
     {
         $qb = $this->createQueryBuilder('a');
         $qb->select('a');

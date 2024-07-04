@@ -42,7 +42,7 @@ abstract class AdminLayoutController extends AbstractController
         $this->init();
 
     }
-    public function indexCRUD(): Response
+    protected function indexCRUD(array $additionalParams = []): Response
     {
         $entityNameLower = strtolower($this->entityName);
 
@@ -52,14 +52,17 @@ abstract class AdminLayoutController extends AbstractController
         $this->theme->addJavascriptFile("js/{$entityNameLower}/deleteItem.js");
         $this->theme->addJavascriptFile("js/{$entityNameLower}/dataTable.js");
 
-        return $this->render("admin/{$entityNameLower}/index.html.twig", [
+        $params = [
             'page_title'    => "Gérer les {$this->entityName}s",
             'jsCustomConfig' => [
                 'deleteUrl' => "{$entityNameLower}/ajax_delete",
                 'datatableUrl' => "{$entityNameLower}/ajax_datatable",
                 'editUrl' => $this->urlGenerator->generate("app_admin_{$entityNameLower}_edit", ['id' => '__ID__']),
             ]
-        ]);
+        ];
+
+        return $this->render("admin/{$entityNameLower}/index.html.twig", array_merge($params, $additionalParams));
+
     }
     protected function newCRUD(  Request $request): Response
     {
