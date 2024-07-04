@@ -93,3 +93,9 @@ services:
               event: 'prePersist'
               priority: 500
               connection: 'default'
+
+    App\EventListener\ImageDeleteListener:
+      arguments:
+        $imagesDirectory: '%images_directory%'
+      tags:
+        - { name: 'doctrine.orm.entity_listener', entity: App\Entity\Image, event: postRemove }

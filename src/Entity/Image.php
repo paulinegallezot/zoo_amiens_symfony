@@ -49,6 +49,14 @@ abstract class Image
         return $this;
     }
 
+    public function getEntityType(): string
+    {
+        $className = (new \ReflectionClass($this))->getShortName();
+
+        // Convertir le nom de classe en minuscules et retirer le mot "Image"
+        return strtolower(str_replace('Image', '', $className));
+    }
+
     public function getFilename(): ?string
     {
         return $this->filename;
