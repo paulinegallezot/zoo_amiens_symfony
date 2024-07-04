@@ -18,7 +18,7 @@ const DeleteItem = function(){
 
                 }
             },
-            error: function (xhr, status, error) {
+            error: function (xhr) {
                 const errorMessage = xhr.status + ': ' + xhr.statusText;
                 alert('Erreur - ' + errorMessage);
             }

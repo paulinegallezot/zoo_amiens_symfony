@@ -1,5 +1,5 @@
-var DeleteItem = function(){
-    var actionDelete = function(ids){
+const DeleteItem = function(){
+    const actionDelete = function(ids){
         $.ajax({
             method: 'DELETE',
             headers: {
@@ -17,12 +17,12 @@ var DeleteItem = function(){
                 }
             },
             error: function (xhr, status, error) {
-                var errorMessage = xhr.status + ': ' + xhr.statusText;
+                const errorMessage = xhr.status + ': ' + xhr.statusText;
                 alert('Erreur - ' + errorMessage);
             }
         });
     }
-    var bind = function(){
+    const bind = function(){
         $(document).on('click','.action_delete',function(){
             const id = $(this).closest('tr').attr('id');
             const counterAnimal = $(this).closest('tr').find('[data-counter_animal]').data('counter_animal');

@@ -19,7 +19,6 @@ class AppExtension extends AbstractExtension
     public function isCurrentRouteReturnActive(string $route): string
     {
         $currentRoute = $this->requestStack->getCurrentRequest()->attributes->get('_route');
-        //return $currentRoute === $route ? 'active' : '';
         return (strpos($currentRoute, $route)  === 0) ? 'active' : '';
 
     }

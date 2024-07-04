@@ -95,10 +95,6 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             ['Stripes', 'tigre', 'jungle']
         ];
 
-
-        //todo create images directory $this->imagesDirectory
-
-
         foreach ($animals as $data) {
             $animal=new Animal();
             $animal->setName($data[0]);

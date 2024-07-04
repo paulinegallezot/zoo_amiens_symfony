@@ -14,7 +14,7 @@ class ImageDeleteListener
         $this->imagesDirectory = $imagesDirectory;
     }
 
-    public function postRemove(Image $image, PostRemoveEventArgs $args)
+    public function postRemove(Image $image)
     {
 
         $filesToRemove = [];

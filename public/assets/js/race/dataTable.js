@@ -1,6 +1,5 @@
-var initDatatable = function () {
-    console.log('load race datatable')
-    var datatableConfig = {
+const initDatatable = function () {
+    const datatableConfig = {
         columns: [
             {data: 'name', orderSequence: ['asc', 'desc']},
             {data: 'counterAnimal', orderSequence: ['asc', 'desc']},
@@ -27,7 +26,7 @@ var initDatatable = function () {
                 searchable: false,
                 orderable: false,
                 render: function (data, type, row) {
-                    var editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
+                    const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
                     return `<div class="d-flex flex-end">
                     <a title="Editer" href="${editUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"><i class="las la-edit fs-2"></i></a>
                     <a title="Supprimer" href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px action_delete"><i class="las la-trash fs-2" data-kt-docs-table-filter="delete_row"></i></a>

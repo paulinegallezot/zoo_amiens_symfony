@@ -9,7 +9,6 @@ class RepositoryHelper
     private EntityManagerInterface $entityManager;
 
     private $request;
-    private $searchValue = null;
     private $filtermatch = null;
     private $limit = 10;
     private $offset = 0;

@@ -129,7 +129,8 @@ class AnimalController extends AdminLayoutController
             $image->setExtension($fileInfo['extension']);
             $image->setFilename($fileInfo['filename']);
             $animal->addImage($image);
-            $imageHelper->saveImage($imageFile, $fileInfo, $this->getImageDirectory());  }
+            $imageHelper->saveImage($imageFile, $fileInfo, $this->getImageDirectory());
+        }
     }
     private function getImageDirectory(): string
     {

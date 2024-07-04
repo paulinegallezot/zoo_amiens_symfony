@@ -1,6 +1,5 @@
-var initDatatable = function () {
-    console.log('load animal datatable')
-    var datatableConfig = {
+const initDatatable = function () {
+    const datatableConfig = {
         filtermatch :{
             race: "#filter_race_id",
             habitat: "#filter_habitat_id"
@@ -17,9 +16,7 @@ var initDatatable = function () {
                 targets: 0,
                 orderable: false,
                 searchable: false,
-                render: function (data, type, row) {
-
-
+                render: function (data) {
                     if (data?.[0]) {
                         return `<img src="/images/${data[0].thumbnail}">`;
                     }
@@ -30,7 +27,7 @@ var initDatatable = function () {
                 targets: 1,
                 orderable: true,
                 searchable: true,
-                render: function (data, type, row) {
+                render: function (data) {
                     return `${data}`;
                 }
             },
@@ -38,15 +35,15 @@ var initDatatable = function () {
                 targets: 2,
                 orderable: false,
                 searchable: false,
-                render: function (data, type, row) {
+                render: function (data) {
                     return `${data.name}`;
                 }
             }, {
                 targets: 3,
                 orderable: false,
                 searchable: false,
-                render: function (data, type, row) {
-                    if (data) { // todo remove la condition des que tous les animaux ont un habitat
+                render: function (data) {
+                    if (data) {
                         return `${data.name}`;
                     }
                     return null;
@@ -57,7 +54,7 @@ var initDatatable = function () {
                 orderable: false,
                 searchable: false,
                 render: function (data, type, row) {
-                    //pour respecter le format du path
+
                     const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
                     return ` <div class="d-flex flex-end">
                                 <a title ="Editer" href="${editUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px "><i class="las la-edit fs-2" ></i></a>

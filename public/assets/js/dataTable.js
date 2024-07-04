@@ -1,10 +1,10 @@
-var HASDatablesGlobals = function(){
+const HASDatablesGlobals = function(){
 
     const initEvents = function (){
 
             const filterSearch = document.querySelector('[data-kt-docs-table-filter="search"]');
             if (filterSearch) {
-            filterSearch.addEventListener('keyup', function (e) {
+            filterSearch.addEventListener('keyup', function () {
                 KTDatatablesServerSide.redraw();
 
             });
@@ -22,12 +22,12 @@ var HASDatablesGlobals = function(){
     }
 }();
 
-var KTDatatablesServerSide = function () {
+const KTDatatablesServerSide = function () {
 
-    var table;
-    var dt;
 
-    var initDatatable = function (config) {
+    let dt;
+
+    const initDatatable = function (config) {
         dt = $("#kt_datatable").DataTable({
             searchDelay: 500,
             processing: true,
@@ -49,8 +49,7 @@ var KTDatatablesServerSide = function () {
                 url: jsCustomConfig.datatableUrl,
                 data: function (d) {
 
-                    const search = $('[data-kt-docs-table-filter="search"]').val();
-                    d.search.value = search;
+                    d.search.value = $('[data-kt-docs-table-filter="search"]').val();
 
                     // Ajout des filtres dynamiques
                     if (config.filtermatch) {
@@ -68,10 +67,7 @@ var KTDatatablesServerSide = function () {
             columnDefs: config.columnDefs
 
         });
-        table = dt.$;
-        dt.on('draw', function () {
-            // Code à exécuter après chaque redessin du tableau
-        });
+
     }
 
     return {
