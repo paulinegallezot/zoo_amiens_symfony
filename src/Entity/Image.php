@@ -85,7 +85,7 @@ abstract class Image
     #[Groups(['default'])]
     public function getThumbnail(): ?string
     {
-        return $this->filename.'-thumb.'.$this->extension;
+        return $this->getEntityType().'/'.$this->filename.'-thumb.'.$this->extension;
     }
 
     public function getFilenameWithExtension($postfix = ''): ?string{

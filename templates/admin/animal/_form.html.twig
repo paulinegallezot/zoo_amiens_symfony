@@ -5,7 +5,7 @@
 <div class="animal-images d-flex flex-wrap">
     {% for image in animal.images %}
         <div class="animal-image d-flex flex-column align-items-center m-2">
-            <img src="{{ asset('images/' ~ image.filename ~ '-thumb.' ~ image.extension) }}" alt=""/>
+            <img src="{{ asset('images/' ~ image.getThumbnail) }}" alt=""/>
             <label>
                 <input type="checkbox" name="delete_images[]" value="{{ image.id }}">
                 Supprimer cette image

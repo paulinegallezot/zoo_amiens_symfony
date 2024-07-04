@@ -75,9 +75,8 @@ class HabitatController extends AdminLayoutController
             $deleteImagesIds = $request->request->all('delete_images');
 
             if (!empty($deleteImagesIds)) {
-                $imageHelper->deleteImages($deleteImagesIds,$this->getParameter('images_directory').'/animals');
+                $imageHelper->deleteImages($deleteImagesIds,$this->getImageDirectory());
             }
-
 
             $this->importAndSaveImage($habitat, $form->get('image')->getData(), $imageHelper);
 
@@ -96,7 +95,6 @@ class HabitatController extends AdminLayoutController
             'form' => $form->createView(),
             'form_template' => 'admin/habitat/_form.html.twig',
             'page_title' => "Habitats / Editer un habitat",
-
             'imagesDirectory' => $this->getParameter('images_directory')
         ]);
     }
@@ -122,8 +120,11 @@ class HabitatController extends AdminLayoutController
             $image->setExtension($fileInfo['extension']);
             $image->setFilename($fileInfo['filename']);
             $habitat->addImage($image);
-            $imageHelper->saveImage($imageFile, $fileInfo, $this->getParameter('images_directory').'/habitats');
+            $imageHelper->saveImage($imageFile, $fileInfo, $this->getImageDirectory());
         }
     }
-
+    private function getImageDirectory(): string
+    {
+        return $this->getParameter('images_directory').'/'.strtolower($this->entityName);
+    }
 }

@@ -84,9 +84,8 @@ class AnimalController extends AdminLayoutController
             $deleteImagesIds = $request->request->all('delete_images');
 
             if (!empty($deleteImagesIds)) {
-                $imageHelper->deleteImages($deleteImagesIds,$this->getParameter('images_directory').'/animals');
+                $imageHelper->deleteImages($deleteImagesIds,$this->getImageDirectory());
             }
-
 
             $this->importAndSaveImage($animal, $form->get('image')->getData(), $imageHelper);
 
@@ -105,7 +104,6 @@ class AnimalController extends AdminLayoutController
             'form' => $form->createView(),
             'form_template' => 'admin/animal/_form.html.twig',
             'page_title' => "Animals / Editer un animal",
-
             'imagesDirectory' => $this->getParameter('images_directory')
         ]);
     }
@@ -131,8 +129,10 @@ class AnimalController extends AdminLayoutController
             $image->setExtension($fileInfo['extension']);
             $image->setFilename($fileInfo['filename']);
             $animal->addImage($image);
-            $imageHelper->saveImage($imageFile, $fileInfo, $this->getParameter('images_directory').'/animals');
-        }
+            $imageHelper->saveImage($imageFile, $fileInfo, $this->getImageDirectory());  }
     }
-
+    private function getImageDirectory(): string
+    {
+        return $this->getParameter('images_directory').'/'.strtolower($this->entityName);
+    }
 }

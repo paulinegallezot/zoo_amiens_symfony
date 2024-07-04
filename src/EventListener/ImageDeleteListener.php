@@ -16,13 +16,10 @@ class ImageDeleteListener
 
     public function postRemove(Image $image, PostRemoveEventArgs $args)
     {
-       /* todo : modifier les repertoire pour les images pour eviter le 's' en trop dans le repertoire 'animals' et 'habitats' */
-
-
 
         $filesToRemove = [];
-        $filesToRemove[] = $this->imagesDirectory . '/' . $image->getEntityType().'s/'. $image->getFilenameWithExtension();
-        $filesToRemove[] = $this->imagesDirectory . '/' . $image->getEntityType().'s/' . $image->getFilenameWithExtension('thumb');
+        $filesToRemove[] = $this->imagesDirectory . '/' . $image->getEntityType().'/'. $image->getFilenameWithExtension();
+        $filesToRemove[] = $this->imagesDirectory . '/' . $image->getEntityType().'/' . $image->getFilenameWithExtension('thumb');
         foreach ($filesToRemove as $filePath) {
             if (file_exists($filePath)) {
                 unlink($filePath);

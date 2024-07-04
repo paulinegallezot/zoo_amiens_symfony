@@ -21,7 +21,7 @@ var initDatatable = function () {
 
 
                     if (data?.[0]) {
-                        return `<img src="/images/animals/${data[0].thumbnail}">`;
+                        return `<img src="/images/${data[0].thumbnail}">`;
                     }
                     return null;
                 }

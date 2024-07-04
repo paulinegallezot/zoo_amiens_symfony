@@ -23,9 +23,9 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
     public function __construct(ImageHelper $imageHelper,ParameterBagInterface $params)
     {
         $this->imageHelper = $imageHelper;
-        $this->imagesDirectory = $params->get('images_directory').'/animals';
+        $this->imagesDirectory = $params->get('images_directory').'/animal';
         $this->clearDirectory($this->imagesDirectory);
-
+        $this->initializeImagesDirectory($this->imagesDirectory);
     }
     private function clearDirectory(string $directory): void
     {
@@ -39,6 +39,20 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
             }
         }
     }
+    private function initializeImagesDirectory(string $directory): void
+    {
+        $filesystem = new Filesystem();
+        try {
+            if ($filesystem->exists($directory)) {
+                $filesystem->remove($directory);
+            }
+            $filesystem->mkdir($directory);
+        } catch (IOExceptionInterface $exception) {
+            throw new \Exception("Erreur lors de la gestion du répertoire des images: " . $exception->getMessage());
+        }
+    }
+
+
     public function load(ObjectManager $manager)
     {
         $races = [];
@@ -82,7 +96,8 @@ class AnimalFixtures extends Fixture implements DependentFixtureInterface
         ];
 
 
-    
+        //todo create images directory $this->imagesDirectory
+
 
         foreach ($animals as $data) {
             $animal=new Animal();
