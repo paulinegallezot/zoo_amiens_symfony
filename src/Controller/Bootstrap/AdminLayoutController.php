@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Service\RepositoryHelper;
-
+use Symfony\Component\String\UnicodeString;
 abstract class AdminLayoutController extends AbstractController
 {
     public MetronicThemeHelper $theme;
@@ -20,6 +20,7 @@ abstract class AdminLayoutController extends AbstractController
     public SerializerInterface $serializer;
 
     protected string $entityName;
+    protected string $entityTitle;
     protected string $gender;
     protected string $render;
 
@@ -39,12 +40,17 @@ abstract class AdminLayoutController extends AbstractController
         $this->entityManager = $entityManager;
         $this->urlGenerator = $urlGenerator;
         $this->serializer = $serializer;
+
+        if (empty($this->entityTitle)) {
+            $this->entityTitle = $this->entityName;
+        }
+
         $this->init();
 
     }
     protected function indexCRUD(array $additionalParams = []): Response
     {
-        $entityNameLower = strtolower($this->entityName);
+        $entityNameLower = $this->convertToSnakeCase($this->entityName);
 
         $this->theme->addVendors(['datatables']);
         $this->theme->addJavascriptFile('https://cdn.jsdelivr.net/npm/bootbox@6.0.0/dist/bootbox.min.js');
@@ -53,7 +59,7 @@ abstract class AdminLayoutController extends AbstractController
         $this->theme->addJavascriptFile("js/{$entityNameLower}/dataTable.js");
 
         $params = [
-            'page_title'    => "Gérer les {$this->entityName}s",
+            'page_title'    => "Gérer les {$this->entityTitle}s",
             'jsCustomConfig' => [
                 'deleteUrl' => "{$entityNameLower}/ajax_delete",
                 'datatableUrl' => "{$entityNameLower}/ajax_datatable",
@@ -66,7 +72,7 @@ abstract class AdminLayoutController extends AbstractController
     }
     protected function newCRUD(  Request $request): Response
     {
-        $entityNameLower = strtolower($this->entityName);
+        $entityNameLower = $this->convertToSnakeCase($this->entityName);
         $renderDir = $this->getRenderDir();
 
         $entityClass = "App\\Entity\\" . ucfirst($this->entityName);
@@ -93,12 +99,12 @@ abstract class AdminLayoutController extends AbstractController
             'entity' => $entity,
             'form' => $form->createView(),
             'form_template' => "admin/{$entityNameLower}/_form.html.twig",
-            'page_title' => "{$this->entityName} / Ajouter un".$this->getGender()."  {$this->entityName}",
+            'page_title' => "{$this->entityTitle} / Ajouter un".$this->getGender()."  {$this->entityTitle}",
         ]);
     }
     protected function editCRUD(string $id, Request $request): Response
     {
-        $entityNameLower = strtolower($this->entityName);
+        $entityNameLower = $this->convertToSnakeCase($this->entityName);
         $renderDir = $this->getRenderDir();
 
         $entityClass = "App\\Entity\\" . ucfirst($this->entityName);
@@ -128,7 +134,7 @@ abstract class AdminLayoutController extends AbstractController
             'entity' => $entity,
             'form' => $form->createView(),
             'form_template' => 'admin/' . $entityNameLower . '/_form.html.twig',
-            'page_title' => ucfirst($this->entityName) . ' / Éditer un' . $this->getGender() . ' ' . strtolower($this->entityName),
+            'page_title' => "{$this->entityTitle} / Editer un".$this->getGender()."  {$this->entityTitle}",
         ]);
     }
     protected function ajaxDatatableCRUD(Request $request): Response
@@ -217,6 +223,14 @@ abstract class AdminLayoutController extends AbstractController
             return '';
         }
     }
+
+    private function convertToSnakeCase(string $input): string
+    {
+        // Utilise Symfony String pour convertir en snake_case
+        $uString = new UnicodeString($input);
+        return $uString->snake()->toString();
+    }
+
 
     public function initDarkSidebarLayout()
     {
