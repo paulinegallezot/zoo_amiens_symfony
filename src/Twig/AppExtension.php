@@ -1,8 +1,10 @@
 <?php
 namespace App\Twig;
+
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Symfony\Component\HttpFoundation\RequestStack;
+
 class AppExtension extends AbstractExtension
 {
     private $requestStack;
@@ -18,8 +20,10 @@ class AppExtension extends AbstractExtension
     }
     public function isCurrentRouteReturnActive(string $route): string
     {
-        $currentRoute = $this->requestStack->getCurrentRequest()->attributes->get('_route');
-        return (strpos($currentRoute, $route)  === 0) ? 'active' : '';
+       /* Pour le menu _menu.html.twig, nous avons besoin de savoir si la route actuelle est celle du lien du menu.*/
 
-    }
+        $currentRoute = $this->requestStack->getCurrentRequest()->attributes->get('_route');
+            return (strpos($currentRoute, $route)  === 0) ? 'active' : '';
+
+        }
 }
