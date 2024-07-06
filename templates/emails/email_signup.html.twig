@@ -1,0 +1,18 @@
+{# templates/emails/email_signup.html.twig #}
+
+{% extends 'emails/email_template.html.twig' %}
+
+{% block content %}
+    <p>Bonjour {{ user.lastname }}</p>
+
+    <p>Nous sommes heureux de vous informer que votre accès à l'administration du zoo Arcadia a été créé avec succès.</p>
+
+    <p>Pour vous connecter, veuillez vous rendre à l'adresse suivante :</p>
+    <p><a href="{{ absolute_url('/login') }}">{{ absolute_url('/login') }}</a></p>
+
+    <p>Vous devez utiliser l'adresse e-mail suivante pour vous connecter : <strong>{{ user.email }}</strong>.</p>
+
+    <p>Le mot de passe vous a été transmis par votre responsable.</p>
+
+    <p>Si vous avez des questions ou avez besoin d'aide, n'hésitez pas à nous contacter.</p>
+{% endblock %}

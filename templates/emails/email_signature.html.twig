@@ -1,0 +1,6 @@
+{# templates/emails/email_signature.html.twig #}
+{% set user = current_user() %}
+
+<p>Cordialement,</p>
+<p>{{ user.firstname }} {{ user.lastname }}</p>
+<img src="{{ absolute_url(asset('assets/media/logo/zoo-arcadia.webp'))}}" alt="Arcadia Zoo Logo" width="150" height="150">

@@ -4,6 +4,8 @@ namespace App\Controller;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
+use Symfony\Component\Mime\Email;
 use Symfony\Component\Routing\Attribute\Route;
 
 class SymfonyTestController extends AbstractController
@@ -30,6 +32,26 @@ class SymfonyTestController extends AbstractController
             }
         } catch (\Exception $e) {
             return new Response("Failed to connect to database: " . $e->getMessage());
+        }
+    }
+
+    #[Route('/send-email', name: 'send_email')]
+    public function sendEmail(MailerInterface $mailer): Response
+    {
+
+
+        $email = (new Email())
+            ->from('sender@example.com')
+            ->to('recipient@example.com')
+            ->subject('Test Email')
+            ->text('This is a test email.')
+            ->html('<p>This is a test email.</p>');
+
+        try {
+            $mailer->send($email);
+            return new Response('Email sent successfully '.$_ENV['MAILER_DSN']);
+        } catch (\Exception $e) {
+            return new Response('Failed to send email: '.$e->getMessage());
         }
     }
 

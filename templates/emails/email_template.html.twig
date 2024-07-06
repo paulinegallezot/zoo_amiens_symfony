@@ -1,0 +1,77 @@
+{# templates/emails/email_template.html.twig #}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e6ffe6; /* Light green background */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ccffcc; /* Light green border */
+        }
+        .header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #66cc66; /* Green header */
+            border-radius: 8px 8px 0 0;
+        }
+        .header img {
+            max-width: 150px;
+            height: auto;
+        }
+        .content {
+            padding: 20px;
+            line-height: 1.6;
+            color: #333333;
+        }
+        .footer {
+            text-align: center;
+            padding: 10px 0;
+            font-size: 12px;
+            color: #666666;
+            background-color: #66cc66; /* Green footer */
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 20px 0;
+            background-color: #4CAF50; /* Green button */
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+        .button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <img src="{{ absolute_url(asset('assets/media/logo/zoo-arcadia.webp')) }}" alt="Arcadia Zoo Logo">
+    </div>
+    <div class="content">
+        <h1>{{ title }}</h1>
+        {% block content %}{% endblock %}
+    </div>
+    <div class="footer">
+        {% include 'emails/email_signature.html.twig' %}
+        <p>&copy; {{ "now"|date("Y") }} Arcadia Zoo. All rights reserved.</p>
+    </div>
+</div>
+</body>
+</html>
