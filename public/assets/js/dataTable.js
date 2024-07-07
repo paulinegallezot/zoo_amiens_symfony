@@ -61,6 +61,15 @@ const KTDatatablesServerSide = function () {
                             }
                         }
                     }
+                    if (config.filterByValue) {
+                        d.filterByValue = {};
+                        for (const [key, selector] of Object.entries(config.filterByValue)) {
+                            const value = $(selector).find(':selected').val();
+                            if (value) {
+                                d.filterByValue[key] = value;
+                            }
+                        }
+                    }
                 }
             },
             columns: config.columns,

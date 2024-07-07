@@ -8,6 +8,9 @@ use Symfony\Component\Routing\Attribute\Route;
 
 class AdminController extends AdminLayoutController
 {
+    protected string $entityTitle = 'Dashboard';
+
+
     #[Route('/admin', name: 'app_admin')]
     public function index(): Response
     {

@@ -73,13 +73,14 @@ class RepositoryHelper
         if ($filterByValue) {
             foreach ($filterByValue as $filter => $value) {
                 if ($value) {
+
                     if ($value=='false') $value = false; // pour les bollean
                     if ($value=='true') $value = true; // pour les bollean
                     $valueParam = $filter.'_value';
 
                     $this->qb
-                        ->andWhere('a.'.$filter . " = :$valueParam")
-                        ->setParameter($valueParam, $value);
+                        ->andWhere('a.'.$filter . " LIKE :$valueParam")
+                        ->setParameter($valueParam, '%'.$value.'%');
                 }
             }
         }
