@@ -10,7 +10,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
 class UserController extends AdminLayoutController
 {
 
@@ -23,6 +27,7 @@ class UserController extends AdminLayoutController
     #[Route('/admin/user', name: 'app_admin_user')]
     public function index(): Response
     {
+
         return parent::indexCRUD();
     }
 
@@ -101,6 +106,27 @@ class UserController extends AdminLayoutController
             'page_title' => "Utilisateurs / Editer un utilisateur",
         ]);
     }
+
+    #[Route('/admin/user/login-as/{id}', name: 'app_admin_user_login_as')]
+    public function loginAs(User $user, Request $request, EntityManagerInterface $entityManager, TokenStorageInterface $tokenStorage,EventDispatcherInterface $eventDispatcher ): Response
+    {
+        // Nom du pare-feu
+        $firewallName = 'main';
+
+        // Création d'un jeton d'authentification pour l'utilisateur
+        $token = new UsernamePasswordToken($user, $firewallName, $user->getRoles());
+
+        // Mise à jour du token dans le contexte de sécurité
+        $tokenStorage->setToken($token);
+
+        // Déclenchement de l'événement de login interactif pour mettre à jour le contexte de la session
+        $event = new InteractiveLoginEvent($request, $token);
+        $eventDispatcher->dispatch($event, 'security.interactive_login');
+
+        // Redirection vers la page d'accueil de l'admin ou une autre page après la connexion
+        return $this->redirectToRoute('app_admin');
+    }
+
 
     #[Route('/admin/user/ajax_delete', name: 'ajax_user_delete', methods: ['DELETE'])]
     public function ajaxDelete(Request $request): Response

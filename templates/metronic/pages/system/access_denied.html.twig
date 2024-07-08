@@ -1,0 +1,34 @@
+{% extends "#{theme.getParameter('KT_THEME_LAYOUT_DIR')}/_system.html.twig" %}
+
+{% block page_title %}Error{% endblock %}
+
+{% block content %}
+
+
+
+    <!--begin::Title-->
+    <h1 class="fw-bolder fs-2qx text-gray-900 mb-4">
+        Accès refusé
+    </h1>
+    <!--end::Title-->
+
+    <!--begin::Text-->
+    <div class="fw-semibold fs-6 text-gray-500 mb-7">
+        Vous n'avez pas les droits pour accéder.
+    </div>
+    <!--end::Text-->
+
+    <!--begin::Illustration-->
+    <div class="mb-11">
+        <img src="{{ theme.image('auth/500-error.png') }}" class="mw-100 mh-300px theme-light-show" alt=""/>
+        <img src="{{ theme.image('auth/500-error-dark.png') }}" class="mw-100 mh-300px theme-dark-show" alt=""/>
+    </div>
+    <!--end::Illustration-->
+
+    <!--begin::Link-->
+    <div class="mb-0">
+        <a href="/admin" class="btn btn-sm btn-primary">Return Home</a>
+    </div>
+    <!--end::Link-->
+
+{% endblock %}

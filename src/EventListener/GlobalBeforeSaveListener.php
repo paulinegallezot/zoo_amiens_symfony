@@ -5,6 +5,7 @@ use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
 use Doctrine\Persistence\Event\LifecycleEventArgs;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 
@@ -14,12 +15,13 @@ class GlobalBeforeSaveListener implements EventSubscriber
 
     private EntityManagerInterface $entityManager;
     private SluggerInterface $slugger;
+    private Security $security;
 
-    public function __construct(SluggerInterface $slugger,EntityManagerInterface $entityManager)
+    public function __construct(SluggerInterface $slugger,EntityManagerInterface $entityManager,Security $security)
     {
         $this->slugger = $slugger;
         $this->entityManager = $entityManager;
-
+        $this->security = $security;
     }
     public function getSubscribedEvents(): array
     {
@@ -41,6 +43,25 @@ class GlobalBeforeSaveListener implements EventSubscriber
             $name = $entity->getName();
             if ($name ) { //&& !$slug
                 $entity->setSlug($this->generateSlug($entity,$entityClassName));
+            }
+        }
+
+        // user_id automatique
+        if (method_exists($entity, 'getUser') && method_exists($entity, 'setUser')) {
+            //dd($entity->getId());
+            //$user = $entity->getUser();
+            if (!$entity->getId()) {
+
+                // Récupère l'utilisateur connecté
+                $connectedUser = $this->security->getUser();
+
+                // Assigne l'utilisateur connecté à l'entité
+                $entity->setUser($connectedUser);
+
+               /* // Si l'entité User a une méthode pour ajouter l'entité, l'utilise
+                if ($connectedUser && method_exists($connectedUser, 'addEntity')) {
+                    $connectedUser->addEntity($entity);
+                }*/
             }
         }
 

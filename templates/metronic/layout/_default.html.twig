@@ -1,7 +1,21 @@
 {% extends 'metronic/layout/master.html.twig' %}
 
 {% block layout %}
+    {% set user = app.user %}
+    {% set roleParts = user.roles[0] | split('_') %}
+    {% set role = roleParts | last %}
+    <script>
 
+        const currentUser = {
+            id: "{{ user.id }}",
+            firstname: "{{ user.firstname }}",
+            lastname: "{{ user.lastname }}",
+            email: "{{ user.email }}",
+            role: "{{ role }}"
+        };
+        // Log the user object to the console for debugging
+        console.log(currentUser);
+    </script>
     <!--begin::App-->
     <div class="d-flex flex-column flex-root app-root" id="kt_app_root">
         <!--begin::Page-->
