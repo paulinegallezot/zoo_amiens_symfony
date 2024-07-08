@@ -1,0 +1,42 @@
+{% extends 'metronic/layout/_default.html.twig' %}
+
+{% block content %}
+    <script>const data_csrf_delete= '{{ csrf_token('delete-item') }}'</script>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="d-flex align-items-center position-relative my-1">
+                <span class="position-absolute ms-6"><i class="las la-edit fs-2" ></i></span>
+                <input type="text" data-kt-docs-table-filter="search" class="form-control  w-250px ps-14 " placeholder="Rechercher">
+            </div>
+        </div>
+            <div class="card-toolbar">
+                {%  if role == 'ADMIN' %}
+                <a  href="{{ path('app_admin_service_new') }}" class="btn btn-primary me-2">Ajouter un service</a>
+                {% endif %}
+            </div>
+
+    </div>
+<div class="card-body">
+    <table id="kt_datatable" class="table align-middle table-row-dashed fs-6 gy-5">
+        <thead>
+        <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+            <th class="text-start">Nom</th>
+            <th class="text-start">Description</th>
+            <th class="text-end min-w-100px">Actions</th>
+        </tr>
+        </thead>
+        <tbody class="text-gray-600 fw-bold">
+        </tbody>
+    </table>
+</div>
+</div>
+{% endblock %}
+{% block javascripts_embed %}
+    <script>
+        let jsCustomConfig = {{ jsCustomConfig | json_encode | raw }};
+        KTUtil.onDOMContentLoaded(function () {
+            initDatatable();
+        });
+    </script>
+{% endblock %}

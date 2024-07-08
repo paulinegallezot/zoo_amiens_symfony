@@ -1,0 +1,53 @@
+const initDatatable = function () {
+    const datatableConfig = {
+            order: [[0,'asc']],
+            columns: [
+                {data: 'name', orderSequence: ['asc', 'desc']},
+                {data: 'description'},
+                {data: null},
+
+            ],
+            columnDefs: [
+
+
+                {
+                    targets: 0,
+                    orderable: true,
+                    searchable: true,
+                    render: function (data, type, row) {
+                        return `${data}`;
+                    }
+                },
+                {
+                    targets: 1,
+                    orderable: false,
+                    searchable: true,
+                    render: function (data, type, row) {
+                        if (data) {
+                            return `${data}`;
+                        }
+                        return '';
+                    }
+                },
+
+                {
+                    targets: -1,
+                    orderable: false,
+                    searchable: false,
+                    render: function (data, type, row) {
+                        let links = [];
+                        let url = jsCustomConfig['editUrl'].replace('__ID__', row.id);
+                        links.push(`<a title="Editer" href="${url}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"><i class="las la-edit  fs-2hx "></i></a>`);
+
+                        if (currentUser.role=='ADMIN') {
+                            links.push(`<a title="Supprimer" href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px action_delete"><i class="las la-trash fs-2"></i></a>`);
+
+                        }
+                        return `<div class="d-flex flex-end">${links.join('')}</div>`;
+
+                    }
+                },
+            ]};
+    KTDatatablesServerSide.init(datatableConfig);
+    DeleteItem.init();
+};
