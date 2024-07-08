@@ -24,9 +24,15 @@ class AnimalFoodController extends AdminLayoutController
     #[Route('/admin/animal_food', name: 'app_admin_animal_food')]
     public function index(AnimalRepository $animalRepository,FoodRepository $foodRepository, UserRepository $userRepository): Response
     {
+        $this->theme->addJavascriptFile('https://npmcdn.com/flatpickr@4.6.13/dist/l10n/fr.js');
+        $this->theme->addJavascriptFile('js/dateRanges.js');
+
+
         $animals = $animalRepository->findBy([], ['name' => 'ASC']);
         $foods = $foodRepository->findBy([], ['name' => 'ASC']);
         $users = $userRepository->findByRole('ROLE_VETO');
+
+
         $additionalParams = [
             'animals' => $animals,
             'foods' => $foods,
@@ -39,6 +45,7 @@ class AnimalFoodController extends AdminLayoutController
     }
 
     #[Route('/admin/animal_food/new', name: 'app_admin_animal_food_new', methods: ['GET', 'POST'])]
+    #[IsGranted('ROLE_EMPLOYE')]
     public function new(Request $request): Response
     {
         return parent::newCRUD(  $request);
@@ -55,7 +62,7 @@ class AnimalFoodController extends AdminLayoutController
     {
         return $this->ajaxDeleteCRUD($request,'Animal');
     }
-    
+
     #[Route('/admin/animal_food/ajax_datatable', name: 'ajax_animal_food_datatable')]
     public function ajax_datatable(Request $request): Response
     {

@@ -41,16 +41,18 @@
             <div class="my-1 px-1 d-flex align-items-center">
                 <div class="border-1 d-flex">
                     <div class="input-container w-250px">
-                        <input class="form-control rounded rounded-end-0 action-datepicker" placeholder="Filtrer par date de soumission"  data-filter="createdAt" />
-                        <span class="input-text d-none action-datepicker-subtext-createdAt" id="kt_datepicker_text">(Date de soumission)</span>
+                        <input class="form-control rounded rounded-end-0 action-datepicker" placeholder="Filtrer par date de distribution"  data-filter="setAt" />
+                        <span class="input-text d-none action-datepicker-subtext-createdAt" id="kt_datepicker_text">(Date de distribution)</span>
                     </div>
-                    <button class="btn btn-icon border border-gray-300 rounded rounded-start-0 action-datepicker-delete"  data-filter="createdAt">
+                    <button class="btn btn-icon border border-gray-300 rounded rounded-start-0 action-datepicker-delete"  data-filter="setAt">
                         <i class="las la-times fs-2"></i></button>
                 </div>
             </div>
         </div>
             <div class="card-toolbar">
+                {%  if role == 'EMPLOYE' %}
                 <a  href="{{ path('app_admin_animal_food_new') }}" class="btn btn-primary me-2">Ajouter un rapport</a>
+                {% endif %}
             </div>
 
     </div>

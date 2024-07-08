@@ -79,4 +79,5 @@ const initDatatable = function () {
     };
     KTDatatablesServerSide.init(datatableConfig);
     DeleteItem.init();
+    DateRanges.init();
 };

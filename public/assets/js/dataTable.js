@@ -26,7 +26,7 @@ const KTDatatablesServerSide = function () {
 
 
     let dt;
-
+    let dateRangesFilter = {};
     const initDatatable = function (config) {
         dt = $("#kt_datatable").DataTable({
             searchDelay: 500,
@@ -70,6 +70,9 @@ const KTDatatablesServerSide = function () {
                             }
                         }
                     }
+                    if (dateRangesFilter){
+                        d.filterByDates = dateRangesFilter;
+                    }
                 }
             },
             columns: config.columns,
@@ -86,6 +89,14 @@ const KTDatatablesServerSide = function () {
         init: function (config) {
             initDatatable(config);
             HASDatablesGlobals.initEvents()
+        },
+        setDateRange: function setDateRange(filter,dateRanges){
+            if (dateRanges === null){
+                delete dateRangesFilter[filter];
+            }else {
+                dateRangesFilter[filter] = dateRanges;
+            }
+            dt.draw();
         }
     }
 }();
