@@ -4,14 +4,14 @@ namespace App\Entity\Traits;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
-use DateTime;
+
 
 trait DateTrait
 {
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?DateTimeInterface $createdAt = null;
 
-    #[ORM\Column(type: "datetime", nullable: true)]
+    #[ORM\Column(type: "datetime_immutable", nullable: true)]
     private ?DateTimeInterface $updatedAt = null;
 
     public function getCreatedAt(): ?DateTimeInterface
@@ -47,6 +47,6 @@ trait DateTrait
     #[ORM\PreUpdate]
     public function updateUpdatedAt(): void
     {
-        $this->updatedAt = new DateTime();
+        $this->updatedAt = new DateTimeImmutable();
     }
 }
