@@ -12,6 +12,7 @@ trait FindInDatatableTrait
 
         $this->repositoryHelper->init($qb, $query);
         $this->repositoryHelper->applySearch();
+        $this->repositoryHelper->applyFilters();
 
         $recordsFiltered = $this->repositoryHelper->getRecordsFiltered();
 
