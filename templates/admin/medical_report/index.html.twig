@@ -25,7 +25,7 @@
                 </select>
             </div>
             <div class="my-1 px-1 w-250px">
-                <select id="filter_user_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par auteur" datatable-redraw="true">
+                <select id="filter_user_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par vétérinaire" datatable-redraw="true">
                     <option></option>
                     {% for user in users %}
                         <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>

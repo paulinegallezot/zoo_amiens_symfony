@@ -22,6 +22,7 @@ abstract class AdminLayoutController extends AbstractController
 
     protected string $entityName;
     protected string $entityTitle;
+    protected string $entityTitleSingular;
     protected string $gender;
     protected string $render;
 
@@ -60,7 +61,7 @@ abstract class AdminLayoutController extends AbstractController
         $this->theme->addJavascriptFile("js/{$entityNameLower}/dataTable.js");
 
         $params = [
-            'page_title'    => "Gérer les {$this->entityTitle}s",
+            'page_title'    => "Gérer les {$this->entityTitle}",
             'jsCustomConfig' => [
                 'deleteUrl' => "{$entityNameLower}/ajax_delete",
                 'datatableUrl' => "{$entityNameLower}/ajax_datatable",
@@ -87,7 +88,7 @@ abstract class AdminLayoutController extends AbstractController
             $this->entityManager->persist($entity);
             $this->entityManager->flush();
 
-            $this->addFlash('success', "{$this->entityName} ajouté".$this->getGender()." avec succès.");
+            $this->addFlash('success', "{$this->entityTitleSingular} ajouté".$this->getGender()." avec succès.");
 
             if ($request->request->has('save_and_exit')) {
                 return $this->redirectToRoute("app_admin_{$entityNameLower}", [], Response::HTTP_SEE_OTHER);
@@ -122,7 +123,7 @@ abstract class AdminLayoutController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->entityManager->flush();
 
-            $this->addFlash('success', ucfirst($this->entityName) . ' mise à jour avec succès.');
+            $this->addFlash('success', "{$this->entityTitleSingular} mise à jour avec succès.");
 
             if ($request->request->has('save_and_exit')) {
                 return $this->redirectToRoute('app_admin_' . $entityNameLower, [], Response::HTTP_SEE_OTHER);

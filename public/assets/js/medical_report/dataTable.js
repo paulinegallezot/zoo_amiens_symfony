@@ -49,7 +49,10 @@ const initDatatable = function () {
                 targets: 3,
                 orderable: false,
                 render: function (data, type, row) {
-                    return `${data}`;
+                   if (data) {
+                       return `${data}`;
+                   }
+                   return '';
                 }
             },
             {
@@ -81,7 +84,7 @@ const initDatatable = function () {
             }
 
         ],
-        order: [[0, 'asc']]
+        order: [[0, 'desc']]
     };
     KTDatatablesServerSide.init(datatableConfig);
     DeleteItem.init();
