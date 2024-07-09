@@ -14,6 +14,7 @@ trait FindInDatatableTrait
         $this->repositoryHelper->applySearch();
         $this->repositoryHelper->applyFilters();
         $this->repositoryHelper->applyFiltersByDates();
+        $this->repositoryHelper->applyFiltersByValue();
         $recordsFiltered = $this->repositoryHelper->getRecordsFiltered();
 
         $this->repositoryHelper->applyOrder();

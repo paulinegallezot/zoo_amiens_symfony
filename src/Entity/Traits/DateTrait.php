@@ -4,11 +4,11 @@ namespace App\Entity\Traits;
 use DateTimeInterface;
 use Doctrine\ORM\Mapping as ORM;
 use DateTimeImmutable;
-
-
+use Symfony\Component\Serializer\Annotation\Groups;
 trait DateTrait
 {
     #[ORM\Column(type: "datetime_immutable", nullable: true)]
+    #[Groups(['default'])]
     private ?DateTimeInterface $createdAt = null;
 
     #[ORM\Column(type: "datetime_immutable", nullable: true)]

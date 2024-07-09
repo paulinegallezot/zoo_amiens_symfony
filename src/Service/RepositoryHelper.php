@@ -74,8 +74,8 @@ class RepositoryHelper
             foreach ($filterByValue as $filter => $value) {
                 if ($value) {
 
-                    if ($value=='false') $value = false; // pour les bollean
-                    if ($value=='true') $value = true; // pour les bollean
+                    if ($value=='false') $value = '0'; // pour les bollean
+                    if ($value=='true') $value = '1'; // pour les bollean
                     $valueParam = $filter.'_value';
 
                     $this->qb
