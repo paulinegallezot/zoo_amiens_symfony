@@ -48,9 +48,9 @@ class GlobalBeforeSaveListener implements EventSubscriber
 
         // user_id automatique
         if (method_exists($entity, 'getUser') && method_exists($entity, 'setUser')) {
-            //dd($entity->getId());
+            //dd($entity);
             //$user = $entity->getUser();
-            if (!$entity->getId()) {
+            if (!$entity->getId() && $this->security->getUser()) {
 
                 // Récupère l'utilisateur connecté
                 $connectedUser = $this->security->getUser();

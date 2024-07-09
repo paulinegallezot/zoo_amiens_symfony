@@ -5,13 +5,16 @@ use App\Controller\Bootstrap\AdminLayoutController;
 use App\Entity\Animal;
 use App\Entity\AnimalImage;
 use App\Form\AnimalType;
+use App\Repository\FoodRepository;
 use App\Repository\HabitatRepository;
 use App\Repository\RaceRepository;
+use App\Repository\UserRepository;
 use App\Service\ImageHelper;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 class AnimalController extends AdminLayoutController
 {
@@ -19,6 +22,35 @@ class AnimalController extends AdminLayoutController
     protected string $entityName = 'Animal';
     protected string $gender = 'm';
     protected string $render = 'global';
+
+
+
+
+    #[Route('/admin/animal/foods/{id}', name: 'app_admin_animal_foods')]
+    public function viewFoods(Animal $animal,UrlGeneratorInterface $urlGenerator,FoodRepository $foodRepository, UserRepository $userRepository): Response
+    {
+        $this->theme->addVendors(['datatables']);
+        $this->theme->addJavascriptFile('https://cdn.jsdelivr.net/npm/bootbox@6.0.0/dist/bootbox.min.js');
+        $this->theme->addJavascriptFile('https://npmcdn.com/flatpickr@4.6.13/dist/l10n/fr.js');
+        $this->theme->addJavascriptFile('js/dateRanges.js');
+        $this->theme->addJavascriptFile('js/dataTable.js');
+        $this->theme->addJavascriptFile("js/animal/dataTable_foods.js");
+
+        $foods = $foodRepository->findBy([], ['name' => 'ASC']);
+        $users = $userRepository->findByRole('ROLE_EMPLOYE');
+
+        // Votre logique ici
+        return $this->render('admin/animal/view_foods.html.twig', [
+            'animal' => $animal,
+            'foods' => $foods,
+            'users' => $users,
+            'page_title' => 'Gestion des animaux / '.$animal->getName().' / Alimentation',
+            'jsCustomConfig' => [
+                'datatableUrl' => $urlGenerator->generate('ajax_animal_food_datatable')
+            ]
+        ]);
+    }
+
 
     #[Route('/admin/animal', name: 'app_admin_animal')]
     public function index( RaceRepository $raceRepository,HabitatRepository $habitatRepository): Response
@@ -110,7 +142,7 @@ class AnimalController extends AdminLayoutController
         ]);
     }
 
-    #[Route('/admin/animal/food/{id}', name: 'app_admin_animal_food', methods: ['GET', 'POST'])]
+   /* #[Route('/admin/animal/food/{id}', name: 'app_admin_animal_food', methods: ['GET', 'POST'])]
     public function food(Request $request, Animal $animal, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(AnimalFoodType::class, $animal);
@@ -133,7 +165,7 @@ class AnimalController extends AdminLayoutController
             'form' => $form->createView(),
             'page_title' => "Animals / Alimentation",
         ]);
-    }
+    }*/
 
     #[Route('/admin/animal/ajax_delete', name: 'ajax_animal_delete', methods: ['DELETE'])]
     #[IsGranted('ROLE_ADMIN')]
@@ -143,11 +175,12 @@ class AnimalController extends AdminLayoutController
     }
     
     #[Route('/admin/animal/ajax_datatable', name: 'ajax_animal_datatable')]
-
     public function ajax_datatable(Request $request): Response
     {
         return $this->ajaxDatatableCRUD($request);
     }
+
+
 
     //---------------------------------------------
     private function importAndSaveImage(Animal $animal, $imageFile, ImageHelper $imageHelper): void

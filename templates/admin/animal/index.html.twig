@@ -28,8 +28,11 @@
                 </select>
             </div>
         </div>
+
             <div class="card-toolbar">
+                {% if is_granted('ROLE_ADMIN') %}
                 <a  href="{{ path('app_admin_animal_new') }}" class="btn btn-primary me-2">Ajouter un animal</a>
+                {% endif %}
             </div>
 
     </div>

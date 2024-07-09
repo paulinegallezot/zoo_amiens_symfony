@@ -1,3 +1,17 @@
+const displayDate = function (date) {
+    let dateFR = new Date(date);
+    // Utilisez toLocaleString pour formater la date
+    return dateFR.toLocaleString('fr-FR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit'
+    });
+
+}
+
 const HASDatablesGlobals = function(){
 
     const initEvents = function (){
@@ -35,7 +49,7 @@ const KTDatatablesServerSide = function () {
             searching: false,
             bLengthChange: false,
             rowId: 'id',
-
+            pageLength: 25,
             "language": {
                 "url": "https://cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/French.json"
             },

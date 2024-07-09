@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use App\Service\RepositoryHelper;
 use Symfony\Component\String\UnicodeString;
+
 abstract class AdminLayoutController extends AbstractController
 {
     public MetronicThemeHelper $theme;
@@ -139,6 +140,7 @@ abstract class AdminLayoutController extends AbstractController
     }
     protected function ajaxDatatableCRUD(Request $request): Response
     {
+
         $entityRepository = $this->entityManager->getRepository("App\\Entity\\" . ucfirst($this->entityName));
 
         list($entities, $recordsFiltered) = $entityRepository->findInDatatable($request->query);

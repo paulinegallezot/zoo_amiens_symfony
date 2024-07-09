@@ -67,10 +67,14 @@ const initDatatable = function () {
                 orderable: false,
                 render: function (data, type, row) {
                     const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
-                    return `<div class="d-flex flex-end">
+                    if (currentUser.role=='VETO') {
+                        return '';
+                    }else {
+                        return `<div class="d-flex flex-end">
                     <a title="Editer" href="${editUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"><i class="las la-edit fs-2"></i></a>
                     <a title="Supprimer" href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px action_delete"><i class="las la-trash fs-2" data-kt-docs-table-filter="delete_row"></i></a>
                 </div>`;
+                    }
                 }
             }
 

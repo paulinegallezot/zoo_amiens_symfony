@@ -29,7 +29,7 @@ security:
     access_denied_url: /access-denied
 
     access_control:
-        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EMPLOYE] }
+        - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EMPLOYE,ROLE_VETO] }
 
 
 

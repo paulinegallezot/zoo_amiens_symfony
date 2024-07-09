@@ -21,15 +21,7 @@
                         <i class="las la-times fs-2"></i></button>
                 </div>
             </div>
-            <div class="my-1 px-1 w-250px">
-                <select id="filter_animal_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par animaux" datatable-redraw="true">
-                    <option></option>
-                    {% for animal in animals %}
-                        <option value="{{ animal.id }}">{{ animal.name }}</option>
-                    {% endfor %}
 
-                </select>
-            </div>
             <div class="my-1 px-1 w-250px">
                 <select id="filter_food_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par nourriture" datatable-redraw="true">
                     <option></option>
@@ -39,7 +31,7 @@
 
                 </select>
             </div>
-           <div class="my-1 px-1 w-250px">
+            <div class="my-1 px-1 w-250px">
                 <select id="filter_user_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par employé" datatable-redraw="true">
                     <option></option>
                     {% for user in users %}
@@ -48,27 +40,23 @@
 
                 </select>
             </div>
-
         </div>
-            <div class="card-toolbar">
-                {%  if role == 'EMPLOYE' %}
-                <a  href="{{ path('app_admin_animal_food_new') }}" class="btn btn-primary me-2">Ajouter un rapport</a>
-                {% endif %}
-            </div>
+        <div class="card-toolbar">
+            <a  href="{{ path('app_admin_animal') }}" class="btn btn-primary me-2">Retour</a>
+        </div>
 
     </div>
 <div class="card-body">
     <table id="kt_datatable" class="table align-middle table-row-dashed fs-6 gy-5">
         <thead>
         <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+
+
             <th class="text-start">Date</th>
-            <th class="text-start">Animal</th>
             <th class="text-start">Nourriture</th>
-           <th class="text-start">Quantité (en g)</th>
+            <th class="text-start">Quantité</th>
             <th class="text-start">Employé</th>
-            {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYE') %}
-            <th class="text-end min-w-100px">Actions</th>
-            {% endif %}
+
         </tr>
         </thead>
         <tbody class="text-gray-600 fw-bold">
@@ -76,6 +64,7 @@
     </table>
 </div>
 </div>
+
 {% endblock %}
 {% block javascripts_embed %}
     <script>
