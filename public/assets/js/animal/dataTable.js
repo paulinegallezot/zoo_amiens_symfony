@@ -56,7 +56,7 @@ const initDatatable = function () {
                 render: function (data, type, row) {
 
                     const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
-                    if (currentUser.role=='VETO') {
+                    if (currentUser.role==='VETO') {
                         const viewFoodsUrl = jsCustomConfig['editUrl'].replace('edit','foods').replace('__ID__', row.id);
                         return ` <div class="d-flex flex-end">
                                 <a title ="Editer" href="${viewFoodsUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px "><i class="las la-utensils fs-2hx" ></i></a>

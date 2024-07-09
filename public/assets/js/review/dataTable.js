@@ -80,7 +80,7 @@ const initDatatable = function () {
                         let url = jsCustomConfig['editUrl'].replace('__ID__', row.id);
                         links.push(`<a title="Editer" href="${url}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px"><i class="las la-edit  fs-2hx "></i></a>`);
 
-                        if (currentUser.role=='ADMIN') {
+                        if (currentUser.role==='ADMIN') {
                             links.push(`<a title="Supprimer" href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px action_delete"><i class="las la-trash fs-2"></i></a>`);
 
                         }

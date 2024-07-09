@@ -30,7 +30,7 @@ const DateRanges = function(){
                         $('.action-datepicker-subtext-'+filter).addClass("d-none");
                     }
 
-                    if (selectedDates.length == 2) {
+                    if (selectedDates.length === 2) {
                         let dateFormated = [];
                         dateFormated[0] = formatDate(selectedDates[0]);
                         dateFormated[1] = formatDate(selectedDates[1]);

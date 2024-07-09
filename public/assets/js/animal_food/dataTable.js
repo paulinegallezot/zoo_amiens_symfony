@@ -67,7 +67,7 @@ const initDatatable = function () {
                 orderable: false,
                 render: function (data, type, row) {
                     const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
-                    if (currentUser.role=='VETO') {
+                    if (currentUser.role ==='VETO') {
                         return '';
                     }else {
                         return `<div class="d-flex flex-end">
