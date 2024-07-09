@@ -1,0 +1,70 @@
+{% extends 'metronic/layout/_default.html.twig' %}
+
+{% block content %}
+    <script>const data_csrf_delete= '{{ csrf_token('delete-item') }}'</script>
+<div class="card">
+    <div class="card-header">
+        <div class="card-title">
+            <div class="my-1 px-1 d-flex align-items-center">
+                <div class="border-1 d-flex">
+                    <div class="input-container w-250px">
+                        <input class="form-control rounded rounded-end-0 action-datepicker" placeholder="Filtrer par date de rapport"  data-filter="visitedAt" />
+                        <span class="input-text d-none action-datepicker-subtext-createdAt" id="kt_datepicker_text">(Date des rapports)</span>
+                    </div>
+                    <button class="btn btn-icon border border-gray-300 rounded rounded-start-0 action-datepicker-delete"  data-filter="visitedAt">
+                        <i class="las la-times fs-2"></i></button>
+                </div>
+            </div>
+            <div class="my-1 px-1 w-250px">
+                <select id="filter_animal_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par animaux" datatable-redraw="true">
+                    <option></option>
+                    {% for animal in animals %}
+                        <option value="{{ animal.id }}">{{ animal.name }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+            <div class="my-1 px-1 w-250px">
+                <select id="filter_user_id" class="form-select " data-control="select2" data-allow-clear="true" data-hide-search="false" data-placeholder="Filtrer par auteur" datatable-redraw="true">
+                    <option></option>
+                    {% for user in users %}
+                        <option value="{{ user.id }}">{{ user.firstname }} {{ user.lastname }}</option>
+                    {% endfor %}
+
+                </select>
+            </div>
+        </div>
+            <div class="card-toolbar">
+                {% if is_granted('ROLE_VETO') %}
+                <a  href="{{ path('app_admin_medical_report_new') }}" class="btn btn-primary me-2">Ajouter un rapport médical</a>
+                {% endif %}
+            </div>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+        <table id="kt_datatable" class="table align-middle table-row-dashed fs-6 gy-5">
+            <thead>
+            <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
+                <th class="text-start">Date</th>
+                <th class="text-start">Animal</th>
+                <th class="text-start ">Etat de santé</th>
+                <th class="text-start">Avis</th>
+                <th class="text-start">Véterinaire</th>
+
+            </tr>
+            </thead>
+            <tbody class="text-gray-600 fw-bold">
+            </tbody>
+        </table>
+    </div>
+</div>
+</div>
+{% endblock %}
+{% block javascripts_embed %}
+    <script>
+        let jsCustomConfig = {{ jsCustomConfig | json_encode | raw }};
+        KTUtil.onDOMContentLoaded(function () {
+            initDatatable();
+        });
+    </script>
+{% endblock %}

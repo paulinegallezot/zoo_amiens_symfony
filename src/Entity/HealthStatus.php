@@ -28,6 +28,12 @@ class HealthStatus
     #[Groups(['default'])]
     private ?string $description = null;
 
+    /**
+     * @var Collection<int, MedicalReport>
+     */
+    #[ORM\OneToMany(targetEntity: MedicalReport::class, mappedBy: 'healthStatus')]
+    private Collection $medicalReports;
+
    /* #[ORM\Column(type: Types::INTEGER, nullable: false,options: ['default' => 0])]
     #[Groups(['default'])]
     private ?int $counterReport  = 0;*/
@@ -41,6 +47,7 @@ class HealthStatus
     public function __construct()
     {
         $this->report = new ArrayCollection();
+        $this->medicalReports = new ArrayCollection();
     }
 
 
@@ -117,6 +124,36 @@ class HealthStatus
         if ($this->counterReport > 0) {
             $this->counterReport--;
         }
+    }
+
+    /**
+     * @return Collection<int, MedicalReport>
+     */
+    public function getMedicalReports(): Collection
+    {
+        return $this->medicalReports;
+    }
+
+    public function addMedicalReport(MedicalReport $medicalReport): static
+    {
+        if (!$this->medicalReports->contains($medicalReport)) {
+            $this->medicalReports->add($medicalReport);
+            $medicalReport->setHealthStatus($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicalReport(MedicalReport $medicalReport): static
+    {
+        if ($this->medicalReports->removeElement($medicalReport)) {
+            // set the owning side to null (unless already changed)
+            if ($medicalReport->getHealthStatus() === $this) {
+                $medicalReport->setHealthStatus(null);
+            }
+        }
+
+        return $this;
     }
 
 }

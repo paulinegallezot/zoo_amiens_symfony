@@ -44,6 +44,12 @@ class Animal
     #[Groups(['default'])]
     private Collection $images;
 
+    /**
+     * @var Collection<int, MedicalReport>
+     */
+    #[ORM\OneToMany(targetEntity: MedicalReport::class, mappedBy: 'animal')]
+    private Collection $medicalReports;
+
 
 
 
@@ -96,6 +102,7 @@ class Animal
     public function __construct()
     {
         $this->images = new ArrayCollection();
+        $this->medicalReports = new ArrayCollection();
 
     }
     // Getters and setters for other properties
@@ -110,6 +117,36 @@ class Animal
             $this->images[] = $image;
             $image->setAnimal($this);
         }
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MedicalReport>
+     */
+    public function getMedicalReports(): Collection
+    {
+        return $this->medicalReports;
+    }
+
+    public function addMedicalReport(MedicalReport $medicalReport): static
+    {
+        if (!$this->medicalReports->contains($medicalReport)) {
+            $this->medicalReports->add($medicalReport);
+            $medicalReport->setAnimal($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicalReport(MedicalReport $medicalReport): static
+    {
+        if ($this->medicalReports->removeElement($medicalReport)) {
+            // set the owning side to null (unless already changed)
+            if ($medicalReport->getAnimal() === $this) {
+                $medicalReport->setAnimal(null);
+            }
+        }
+
         return $this;
     }
 

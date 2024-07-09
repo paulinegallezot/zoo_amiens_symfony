@@ -33,7 +33,9 @@ class RepositoryHelper
     public function applySearch(): void
     {
 
-        $searchValue = $this->request->all('search')['value'];
+        $searchValueArray = $this->request->all('search');
+        $searchValue = $searchValueArray['value'] ?? null;
+
 
         if ($searchValue) {
             $expr = $this->qb->expr();
