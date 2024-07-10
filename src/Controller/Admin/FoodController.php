@@ -11,8 +11,9 @@ class FoodController extends AdminLayoutController
 {
 
     protected string $entityName = 'Food';
-    protected string $entityTitle = 'Aliment';
-    protected string $gender = 'f';
+    protected string $entityTitle = 'Aliments';
+    protected string $entityTitleSingular = 'Aliment';
+    protected string $gender = 'm';
     protected string $render = 'global';
 
 
