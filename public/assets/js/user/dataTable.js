@@ -57,7 +57,7 @@ const initDatatable = function () {
                     render: function (data, type, row) {
 
                         if (data) {
-                            console.log(data)
+
                             return roles[data[0]];
                         }
                         return '';

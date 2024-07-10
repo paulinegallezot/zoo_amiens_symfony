@@ -35,7 +35,7 @@ class AnimalFoodFixtures extends Fixture implements DependentFixtureInterface
         }
 
         $user = [];
-        foreach ($manager->getRepository(User::class)->findByRole('ROLE_EMPLOYE') as $user) {
+        foreach ($manager->getRepository(User::class)->findByRoles(['ROLE_EMPLOYE','ROLE_VETO']) as $user) {
             $users[] = $user;
         }
 

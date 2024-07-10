@@ -13,120 +13,117 @@
             <div class="menu-item pt-5">
                 <!--begin:Menu content-->
                 <div class="menu-content">
-                    <span class="menu-heading fw-bold text-uppercase fs-7">{#Le zoo#}</span>
+                    <span class="menu-heading fw-bold text-uppercase fs-7">{# Le zoo #}</span>
                 </div>
                 <!--end:Menu content-->
             </div>
 
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYE') or is_granted('ROLE_VETO') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_food') }}" href="{{ path('app_admin_animal_food') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_food') }}"
+                       href="{{ path('app_admin_animal_food') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Rapport alimentation</span>
                     </a>
                 </div>
             {% endif %}
 
-            {% if  is_granted('ROLE_VETO') %}
-            <div class="menu-item">
-                <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}" href="{{ path('app_admin_animal') }}">
-                    <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
-                    <span class="menu-title">Rapport alimentation(2)</span>
-                </a>
-            </div>
-            {% endif %}
-
-
-
-
-            {%  if role == 'VETO' or role == 'ADMIN' %}
-            <div class="menu-item">
-                <a class="menu-link {{ is_current_route_return_active('app_admin_') }}" href="{{ path('app_admin') }}">
-                    <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
-                    <span class="menu-title">Rapports médicaux</span>
-                </a>
-            </div>
-            {% endif %}
-
-
-
-            <!--begin:Menu item-->
-            <div class="menu-item">
-                <!--begin:Menu link-->
-                <a class="menu-link {{ is_current_route_return_active('app_admin_user') }}" href="{{ path('app_admin_user') }}">
-                    <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
-                    <span class="menu-title">Utilisateurs</span>
-                </a>
-                <!--end:Menu link-->
-            </div>
-            {%  if  role == 'ADMIN' %}
-            <div class="menu-item pt-5">
-                <div class="menu-content">
-                    <span class="menu-heading fw-bold text-uppercase fs-7">Datas</span>
+           {# {% if  is_granted('ROLE_VETO') %}
+                <div class="menu-item">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}"
+                       href="{{ path('app_admin_animal') }}">
+                        <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
+                        <span class="menu-title">Rapport alimentation(2)</span>
+                    </a>
                 </div>
-            </div>
+            {% endif %}#}
+
+            {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_VETO') %}
+                <div class="menu-item">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_medical_report') }}"
+                       href="{{ path('app_admin_medical_report') }}">
+                        <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
+                        <span class="menu-title">Rapports médicaux</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="menu-item">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_user') }}"
+                       href="{{ path('app_admin_user') }}">
+                        <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
+                        <span class="menu-title">Utilisateurs</span>
+                    </a>
+                </div>
+            {% endif %}
+
+            {% if is_granted('ROLE_ADMIN') %}
+                <div class="menu-item pt-5">
+                    <div class="menu-content">
+                        <span class="menu-heading fw-bold text-uppercase fs-7">Datas</span>
+                    </div>
+                </div>
 
                 <div class="menu-item">
-                    <!--begin:Menu link-->
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}" href="{{ path('app_admin_animal') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}"
+                       href="{{ path('app_admin_animal') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Animaux</span>
                     </a>
-                    <!--end:Menu link-->
                 </div>
 
-
-
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_food') }}" href="{{ path('app_admin_food') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_food') }}"
+                       href="{{ path('app_admin_food') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Aliments </span>
                     </a>
                 </div>
 
-
-
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_race') }}" href="{{ path('app_admin_race') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_race') }}"
+                       href="{{ path('app_admin_race') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Races</span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat') }}" href="{{ path('app_admin_habitat') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat') }}"
+                       href="{{ path('app_admin_habitat') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Habitats</span>
                     </a>
                 </div>
 
-            <div class="menu-item">
-                <a class="menu-link {{ is_current_route_return_active('app_admin_health_status') }}" href="{{ path('app_admin_health_status') }}">
-                    <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
-                    <span class="menu-title">Etats de santés</span>
-                </a>
-            </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_health_status') }}"
+                       href="{{ path('app_admin_health_status') }}">
+                        <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
+                        <span class="menu-title">Etats de santés</span>
+                    </a>
+                </div>
             {% endif %}
 
-
-            <div class="menu-item pt-5">
-                <div class="menu-content">
-                    <span class="menu-heading fw-bold text-uppercase fs-7">Contenu Web</span>
+            {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_EMPLOYE') %}
+                <div class="menu-item pt-5">
+                    <div class="menu-content">
+                        <span class="menu-heading fw-bold text-uppercase fs-7">Contenu Web</span>
+                    </div>
                 </div>
-            </div>
 
-            {%  if role == 'EMPLOYE' or role == 'ADMIN' %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_review') }}" href="{{ path('app_admin_review') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_review') }}"
+                       href="{{ path('app_admin_review') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Avis visiteurs</span>
                     </a>
                 </div>
-            {% endif %}
-            {%  if role == 'EMPLOYE' or role == 'ADMIN' %}
-                <div class="menu-item">
 
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_service') }}" href="{{ path('app_admin_service') }}">
+                <div class="menu-item">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_service') }}"
+                       href="{{ path('app_admin_service') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Services du zoo</span>
                     </a>
@@ -145,32 +142,32 @@
             <!--end:Menu item-->
             <!--begin:Menu item-->
             <div class="menu-item">
-                <!--begin:Menu link-->
+
                 <a class="menu-link" href="#">
                     <span class="menu-icon">{{ theme.getIcon('rocket', 'fs-2') | raw }}</span>
                     <span class="menu-title">Support</span>
                 </a>
-                <!--end:Menu link-->
+
             </div>
             <!--end:Menu item-->
             <!--begin:Menu item-->
             <div class="menu-item">
-                <!--begin:Menu link-->
+
                 <a class="menu-link" href="#">
                     <span class="menu-icon">{{ theme.getIcon('abstract-26', 'fs-2') | raw }}</span>
                     <span class="menu-title">Documentation</span>
                 </a>
-                <!--end:Menu link-->
+
             </div>
             <!--end:Menu item-->
             <!--begin:Menu item-->
             <div class="menu-item">
-                <!--begin:Menu link-->
+
                 <a class="menu-link" href="#" target="_blank">
                     <span class="menu-icon">{{ theme.getIcon('code', 'fs-2') | raw }}</span>
                     <span class="menu-title">Version</span>
                 </a>
-                <!--end:Menu link-->
+
             </div>
             <!--end:Menu item-->
         </div>

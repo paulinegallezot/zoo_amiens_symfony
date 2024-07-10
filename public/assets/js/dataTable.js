@@ -13,16 +13,19 @@ const displayDate = function (date) {
 }
 var DeleteItem = function(){
     var actionDelete = function(ids){
+        const entity = jsCustomConfig.deleteUrl.split('/')[0];
+        /* Ajustement de la fonction pour les voters, on peut sans doute faire mieux*/
+        /* Passer tous les ajaxDelete en POST */
+        /* Approfondir le problème sur les voters avec DELETE */
 
-
-        $.ajax({
-            method: 'DELETE',
+         $.ajax({
+            method: entity === 'animal_food' || entity === 'medical_report' ? 'POST' : 'DELETE', // On passe de DELETE à POST pour les entity animal_food et animal_report
             headers: {
-                'X-CSRF-Token': data_csrf_delete    ,
+                'X-CSRF-Token': data_csrf_delete,
             },
             data: {ids: [ids]},
             dataType: 'json',
-            url: jsCustomConfig.deleteUrl,
+            url: jsCustomConfig.deleteUrl + ((entity === 'animal_food' || entity === 'medical_report') ? '/' + ids : ''),
             success: function (response) {
                 if (response.success === true) {
                     KTDatatablesServerSide.redraw();

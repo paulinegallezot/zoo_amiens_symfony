@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 use App\Controller\Bootstrap\AdminLayoutController;
+use App\Entity\AnimalFood;
 use App\Repository\AnimalRepository;
 use App\Repository\FoodRepository;
 use App\Repository\UserRepository;
@@ -17,8 +18,9 @@ class AnimalFoodController extends AdminLayoutController
 {
 
     protected string $entityName = 'AnimalFood';
-    protected string $entityTitle = 'Nouriture';
-    protected string $gender = 'f';
+    protected string $entityTitle = 'Rapports d\'alimentations';
+    protected string $entityTitleSingular = 'Rapport d\'alimentation';
+    protected string $gender = 'm';
     protected string $render = 'global';
 
 
@@ -32,7 +34,7 @@ class AnimalFoodController extends AdminLayoutController
 
         $animals = $animalRepository->findBy([], ['name' => 'ASC']);
         $foods = $foodRepository->findBy([], ['name' => 'ASC']);
-        $users = $userRepository->findByRole('ROLE_EMPLOYE');
+        $users = $userRepository->findByRoles(['ROLE_EMPLOYE','ROLE_VETO']);
 
 
         $additionalParams = [
@@ -54,15 +56,15 @@ class AnimalFoodController extends AdminLayoutController
     }
 
     #[Route('/admin/animal_food/edit/{id}', name: 'app_admin_animal_food_edit', methods: ['GET', 'POST'])]
-    #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_EMPLOYE))]
-    public function edit(string $id, Request $request,): Response
+    #[IsGranted('edit', subject: 'animalFood')]
+    public function edit(string $id, Request $request,AnimalFood $animalFood): Response
     {
         return $this->editCRUD($id, $request);
     }
 
-    #[Route('/admin/animal_food/ajax_delete', name: 'ajax_animal_food_delete', methods: ['DELETE'])]
-    #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_EMPLOYE))]
-    public function ajaxDelete(Request $request): Response
+    #[Route('/admin/animal_food/ajax_delete/{id}', name: 'ajax_animal_food_delete', methods: ['POST'])]
+    #[IsGranted('ajaxDelete', subject: 'animalFood')]
+    public function ajaxDelete(Request $request,AnimalFood $animalFood): Response
     {
         return $this->ajaxDeleteCRUD($request,'Animal');
     }
