@@ -59,12 +59,12 @@ const initDatatable = function () {
                     if (currentUser.role==='VETO') {
                         const viewFoodsUrl = jsCustomConfig['editUrl'].replace('edit','foods').replace('__ID__', row.id);
                         return ` <div class="d-flex flex-end">
-                                <a title ="Editer" href="${viewFoodsUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px "><i class="las la-utensils fs-2hx" ></i></a>
+                                <a title ="Editer" href="${viewFoodsUrl}" class="btn btn-icon btn-active-light btn-active-color-primary "><i class="las la-utensils fs-1" ></i></a>
                                 </div>`;
                     }else {
                         return ` <div class="d-flex flex-end">
-                                <a title ="Editer" href="${editUrl}" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px "><i class="las la-edit fs-2hx" ></i></a>
-                                <a title ="Supprimer" href="#" class="btn btn-icon btn-custom btn-icon-muted btn-active-light btn-active-color-primary w-35px h-35px w-md-40px h-md-40px action_delete"><i class="las la-trash fs-2hx" data-kt-docs-table-filter="delete_row"></i></a>
+                                <a title ="Editer" href="${editUrl}" class="btn btn-icon btn-active-light btn-active-color-primary "><i class="las la-edit fs-1" ></i></a>
+                                <a title ="Supprimer" href="#" class="btn btn-icon btn-active-light btn-active-color-primary action_delete"><i class="las la-trash fs-1" data-kt-docs-table-filter="delete_row"></i></a>
                             </div>`;
                     }
                 }

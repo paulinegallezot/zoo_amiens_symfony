@@ -16,14 +16,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+
+#[IsGranted('ROLE_ADMIN')]
 class AnimalController extends AdminLayoutController
 {
 
     protected string $entityName = 'Animal';
+    protected string $entityTitle = 'Animaux';
+    protected string $entityTitleSingular = 'Animal';
     protected string $gender = 'm';
     protected string $render = 'global';
-
-
 
 
     #[Route('/admin/animal/foods/{id}', name: 'app_admin_animal_foods')]
