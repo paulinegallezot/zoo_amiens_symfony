@@ -2,17 +2,20 @@
 
 namespace App\Controller\Admin;
 use App\Controller\Bootstrap\AdminLayoutController;
+use App\Security\RoleExpressions;
 use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted(new Expression('is_granted("ROLE_ADMIN") or is_granted("ROLE_EMPLOYE")'))]
+#[IsGranted(new Expression(RoleExpressions::ADMIN_OR_EMPLOYE))]
 class ServiceController extends AdminLayoutController
 {
 
     protected string $entityName = 'Service';
+    protected string $entityTitle = 'Services';
+    protected string $entityTitleSingular = 'Service';
     protected string $gender = 'm';
     protected string $render = 'global';
 
