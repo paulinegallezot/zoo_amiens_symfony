@@ -3,7 +3,9 @@
 namespace App\Controller\Bootstrap;
 
 use App\Service\MetronicThemeHelper;
+use Doctrine\DBAL\Exception\ForeignKeyConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityNotFoundException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -57,7 +59,6 @@ abstract class AdminLayoutController extends AbstractController
         $this->theme->addVendors(['datatables']);
         $this->theme->addJavascriptFile('https://cdn.jsdelivr.net/npm/bootbox@6.0.0/dist/bootbox.min.js');
         $this->theme->addJavascriptFile('js/dataTable.js');
-        $this->theme->addJavascriptFile("js/{$entityNameLower}/deleteItem.js");
         $this->theme->addJavascriptFile("js/{$entityNameLower}/dataTable.js");
 
         $params = [
@@ -188,8 +189,34 @@ abstract class AdminLayoutController extends AbstractController
                         'Content-Type' => 'application/json'
                     ]);
                 } else {
-                    $this->entityManager->remove($entity);
-                    $this->entityManager->flush();
+                    try {
+                        $this->entityManager->remove($entity);
+                        $this->entityManager->flush();
+                    } catch (ForeignKeyConstraintViolationException $e) {
+                        // Contrainte d'intégrité référentielle violée
+                        return new Response(json_encode([
+                            'success' => false,
+                            'message' => 'Impossible de supprimer cet élément car il est lié à d\'autres éléments.'
+                        ]), Response::HTTP_OK, [
+                            'Content-Type' => 'application/json'
+                        ]);
+                    } catch (EntityNotFoundException $e) {
+                        // Entité non trouvée
+                        return new Response(json_encode([
+                            'success' => false,
+                            'message' => 'L\'entité que vous essayez de supprimer n\'existe pas.'
+                        ]), Response::HTTP_OK, [
+                            'Content-Type' => 'application/json'
+                        ]);
+                    } catch (\Exception $e) {
+                        // Erreur générique
+                        return new Response(json_encode([
+                            'success' => false,
+                            'message' => 'Une erreur interne s\'est produite lors de la suppression.'
+                        ]), Response::HTTP_OK, [
+                            'Content-Type' => 'application/json'
+                        ]);
+                    }
                 }
             } else {
                 return new Response(json_encode(['success' => false, 'message' => 'Une erreur s\'est produite']), Response::HTTP_OK, [
