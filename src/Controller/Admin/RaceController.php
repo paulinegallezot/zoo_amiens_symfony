@@ -12,6 +12,9 @@ class RaceController extends AdminLayoutController
 {
 
     protected string $entityName = 'Race';
+    protected string $entityTitle = 'Races';
+    protected string $entityTitleSingular = 'Race';
+
     protected string $gender = 'f';
     protected string $render = 'global';
 
