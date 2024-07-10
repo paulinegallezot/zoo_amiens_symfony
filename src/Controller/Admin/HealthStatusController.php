@@ -12,8 +12,8 @@ class HealthStatusController extends AdminLayoutController
 {
 
     protected string $entityName = 'HealthStatus';
-    protected string $entityTitle = 'Etat de santé';
-
+    protected string $entityTitle = 'Etats de santés';
+    protected string $entityTitleSingular = 'Etat de santé';
     protected string $gender = 'm';
     protected string $render = 'global';
 
