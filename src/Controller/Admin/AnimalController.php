@@ -9,15 +9,17 @@ use App\Repository\FoodRepository;
 use App\Repository\HabitatRepository;
 use App\Repository\RaceRepository;
 use App\Repository\UserRepository;
+use App\Security\RoleExpressions;
 use App\Service\ImageHelper;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\ExpressionLanguage\Expression;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
 
-#[IsGranted('ROLE_ADMIN')]
+
 class AnimalController extends AdminLayoutController
 {
 
@@ -29,6 +31,7 @@ class AnimalController extends AdminLayoutController
 
 
     #[Route('/admin/animal/foods/{id}', name: 'app_admin_animal_foods')]
+    #[IsGranted(new Expression(RoleExpressions::ALL))]
     public function viewFoods(Animal $animal,UrlGeneratorInterface $urlGenerator,FoodRepository $foodRepository, UserRepository $userRepository): Response
     {
         $this->theme->addVendors(['datatables']);
