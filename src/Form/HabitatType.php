@@ -28,14 +28,17 @@ class HabitatType extends AbstractType
 
                 'constraints' => [
                     new File([
-                        'maxSize' => '100024k',
+                        'maxSize' => '400024k',
                         'mimeTypes' => [
                             'image/jpeg',
                             'image/png',
                             'image/webp'
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid image document',
+                        'mimeTypesMessage' => 'Veuillez télécharger une image valide',
                     ])
+                ],
+                'attr' => [
+                    'accept' => 'image/jpeg,image/png,image/webp', // Accepte uniquement ces types de fichiers
                 ],
             ])
 

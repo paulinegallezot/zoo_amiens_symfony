@@ -17,6 +17,7 @@ class HabitatController extends AdminLayoutController
 {
 
     protected string $entityName = 'Habitat';
+    protected string $entityTitle = 'Habitats';
     protected string $gender = 'm';
     protected string $render = 'global';
 
