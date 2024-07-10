@@ -26,7 +26,7 @@ class UserType extends AbstractType
                 'help' => 'Entrer un mot de passe entre 8 et 32 caratères '.$options['password_edit_or_new'],
                 'mapped' => false,
                 'required' => $options['password_required'],
-                'attr' => ['autocomplete' => 'off']])
+                'attr' => ['autocomplete' => 'new-password']])
         ->add('send_email', CheckboxType::class, [
             'label'    => 'Envoyer l\'e-mail de confirmation d\'inscription',
             'required' => false,

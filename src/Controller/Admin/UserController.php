@@ -12,14 +12,18 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
+
+#[IsGranted('ROLE_ADMIN')]
 class UserController extends AdminLayoutController
 {
 
     protected string $entityName = 'User';
-    protected string $entityTitle = 'Utilisateur';
+    protected string $entityTitle = 'Utilisateurs';
+    protected string $entityTitleSingular = 'Utilisateur';
     protected string $gender = 'm';
     protected string $render = 'global';
 
