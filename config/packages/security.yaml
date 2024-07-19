@@ -10,6 +10,10 @@ security:
                 class: App\Entity\User
                 property: email
     firewalls:
+        api:
+            pattern: ^/api
+            stateless: true
+
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -30,7 +34,7 @@ security:
 
     access_control:
         - { path: ^/admin, roles: [ROLE_ADMIN, ROLE_EMPLOYE,ROLE_VETO] }
-
+        - { path: ^/api, role: IS_AUTHENTICATED_ANONYMOUSLY, ip: 192.0.74.122 }
 
 
 when@test:
