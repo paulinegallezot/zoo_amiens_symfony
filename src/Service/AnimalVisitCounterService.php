@@ -13,6 +13,11 @@ class AnimalVisitCounterService
         $this->dm = $dm;
     }
 
+    public function finAllAnimalCounters(): array
+    {
+        return $this->dm->getRepository(AnimalVisitCounter::class)->findAll();
+    }
+
     public function findCounterByAnimalName(string $animalName): ?AnimalVisitCounter
     {
         return $this->dm->getRepository(AnimalVisitCounter::class)->findOneBy(['animalName' => $animalName]);

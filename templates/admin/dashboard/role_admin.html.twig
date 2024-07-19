@@ -1,0 +1,24 @@
+{% extends 'metronic/layout/_default.html.twig' %}
+
+{% block content %}
+
+    <h1>Animaux</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom de l'animal</th>
+            <th>Vues</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for counter in counters %}
+            <tr>
+                <td>{{ counter.animalName }}</td>
+                <td>{{ counter.visitCount }}</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+
+{% endblock %}
