@@ -2,6 +2,7 @@
 namespace App\DataFixtures;
 
 use App\Entity\Animal;
+use App\Entity\Food;
 use App\Entity\HealthStatus;
 use App\Entity\MedicalReport;
 use App\Entity\User;
@@ -37,6 +38,11 @@ class MedicalReportFixtures extends Fixture implements DependentFixtureInterface
             $healthStatuses[] = $healthStatus;
         }
 
+        $foods = [];
+        foreach ($manager->getRepository(Food::class)->findAll() as $food) {
+            $foods[] = $food;
+        }
+
         for ($i = 0; $i < 40; $i++) {
 
             $medicalReport = new MedicalReport();
@@ -49,6 +55,8 @@ class MedicalReportFixtures extends Fixture implements DependentFixtureInterface
             $medicalReport->setUser($user);
             $medicalReport->setHealthStatus($healthStatus);
             $medicalReport->setReview($faker->paragraph(3));
+            $medicalReport->setFood($food);
+            $medicalReport->setQuantityInGrams($faker->numberBetween(100, 5000));
             $medicalReport->setVisitedAt(\DateTimeImmutable::createFromMutable($faker->dateTimeBetween('-1 years', 'now')));
 
 

@@ -10,6 +10,8 @@ const initDatatable = function () {
             {data: 'animal'},
             {data: 'healthStatus'},
             {data: 'review'},
+            {data: 'food'},
+            {data: 'quantityInGrams'},
             {data: 'user'},
             {data: null}
 
@@ -59,7 +61,31 @@ const initDatatable = function () {
                 targets: 4,
                 orderable: false,
                 render: function (data, type, row) {
-                    return `${data.firstname} ${data.lastname}`;
+                    if (data) {
+                        return `${data.name}`;
+                    }
+                    return '';
+                    }
+            },
+            {
+                targets: 5,
+                orderable: false,
+                render: function (data, type, row) {
+                    if (data) {
+                        return `${data}`;
+                    }
+                    return '';
+                }
+            },
+            {
+                targets: 6,
+                orderable: false,
+                render: function (data, type, row) {
+                    if (currentUser.id !== row.user.id) {
+                        return `<span class="badge badge-light-success fs-base">${data.firstname} ${data.lastname}</span>`;
+                    }else{
+                        return `<span class="badge badge-success fs-base">${data.firstname} ${data.lastname}</span>`;
+                    }
                 }
             },
             {
@@ -69,17 +95,18 @@ const initDatatable = function () {
                 render: function (data, type, row) {
                     const editUrl = jsCustomConfig['editUrl'].replace('__ID__', row.id);
 
-                    if (currentUser.role !== 'ROLE_ADMIN'){
+                    if (currentUser.role === 'ADMIN'  || (currentUser.id === row.user.id && (currentUser.role === 'VETO' ))) {
                         return `<div class="d-flex flex-end">
                         <a title="Editer"    href="${editUrl}" class="btn btn-icon btn-active-light btn-active-color-primary"><i class="las la-edit fs-1"></i></a>
                         <a title="Supprimer" href="#"          class="btn btn-icon btn-active-light btn-active-color-primary action_delete"><i class="las la-trash fs-1" ></i></a>
                         </div>`;
-                    }else if (currentUser.id !== row.user.id && currentUser.role === 'ROLE_VETO') {
+                    }else if (currentUser.id !== row.user.id && currentUser.role === 'VETO' ){
                         return `<div class="d-flex flex-end">
                         <a title="Editer"    href="#" class="btn btn-icon btn-color-gray-400 btn-active-color-danger"><i class="las la-edit fs-1"></i></a>
                         <a title="Supprimer" href="#" class="btn btn-icon btn-color-gray-400 btn-active-color-danger"><i class="las la-trash fs-1" ></i></a>
                         </div>`;
                     }
+                    return '';
                 }
             }
 

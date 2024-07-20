@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Animal;
 use App\Entity\AnimalFood;
+use App\Entity\Food;
 use App\Entity\healthStatus;
 use App\Entity\MedicalReport;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
@@ -39,6 +40,14 @@ class MedicalReportType extends AbstractType
                 ]
             ])
             ->add('review',null,['label'=>"Avis médical"])
+            ->add('food', EntityType::class, [
+                'class' => Food::class,
+                'choice_label' => 'name',
+                'label' => 'Alimentation à donner à l\'animal',
+
+            ])
+            ->add('quantityInGrams',null,['label'=>"Quantité en grammes"]);
+
         ;
     }
 

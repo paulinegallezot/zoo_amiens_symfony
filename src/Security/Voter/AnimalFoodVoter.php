@@ -49,7 +49,7 @@ class AnimalFoodVoter extends Voter
 
     private function canEditOrDelete(AnimalFood $animalFood, User $user): bool
     {
-        return $animalFood->getUser() === $user || $this->security->isGranted('ROLE_ADMIN');
+        return ($animalFood->getUser() === $user && $this->security->isGranted('ROLE_EMPLOYE')) || $this->security->isGranted('ROLE_ADMIN');
     }
 }
 

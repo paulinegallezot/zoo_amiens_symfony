@@ -49,7 +49,7 @@ class AnimalFoodController extends AdminLayoutController
     }
 
     #[Route('/admin/animal_food/new', name: 'app_admin_animal_food_new', methods: ['GET', 'POST'])]
-    #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_EMPLOYE))]
+    #[IsGranted(new Expression(RoleExpressions::EMPLOYE))]
     public function new(Request $request): Response
     {
         return parent::newCRUD(  $request);

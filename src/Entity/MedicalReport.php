@@ -39,6 +39,15 @@ class MedicalReport
     #[Groups(['default','api_view_animal'])]
     private ?HealthStatus $healthStatus = null;
 
+    #[ORM\ManyToOne(targetEntity: Food::class, inversedBy: 'medicalReports')]
+    #[ORM\JoinColumn(nullable: false)]
+    #[Groups(['default'])]
+    private Food $food;
+
+    #[ORM\Column(type: 'integer')]
+    #[Groups(['default'])]
+    private int $quantityInGrams;
+
 
 
     public function getReview(): ?string
@@ -76,6 +85,29 @@ class MedicalReport
 
         return $this;
     }
+
+    public function getFood(): ?Food
+    {
+        return $this->food;
+    }
+
+    public function setFood(?Food $food): self
+    {
+        $this->food = $food;
+        return $this;
+    }
+
+    public function getQuantityInGrams(): ?int
+    {
+        return $this->quantityInGrams;
+    }
+
+    public function setQuantityInGrams(int $quantityInGrams): self
+    {
+        $this->quantityInGrams = $quantityInGrams;
+        return $this;
+    }
+
     public function getUser(): User
     {
         return $this->user;
