@@ -38,7 +38,7 @@
                 </div>
             {% endif %}#}
 
-            {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_VETO') %}
+            {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_VETO') or is_granted('ROLE_EMPLOYE') %}
                 <div class="menu-item">
                     <a class="menu-link {{ is_current_route_return_active('app_admin_medical_report') }}"
                        href="{{ path('app_admin_medical_report') }}">

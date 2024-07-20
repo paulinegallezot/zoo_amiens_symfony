@@ -24,7 +24,7 @@ class MedicalReportController extends AdminLayoutController
 
 
     #[Route('/admin/medical_report', name: 'app_admin_medical_report')]
-    #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_VETO))]
+    #[IsGranted(new Expression(RoleExpressions::ALL))]
     public function index(AnimalRepository $animalRepository,UserRepository $userRepository): Response
     {
         $this->theme->addJavascriptFile('https://npmcdn.com/flatpickr@4.6.13/dist/l10n/fr.js');
@@ -64,7 +64,7 @@ class MedicalReportController extends AdminLayoutController
     }
     
     #[Route('/admin/medical_report/ajax_datatable', name: 'ajax_medical_report_datatable')]
-    #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_VETO))]
+    #[IsGranted(new Expression(RoleExpressions::ALL))]
     public function ajax_datatable(Request $request): Response
     {
         return $this->ajaxDatatableCRUD($request);
