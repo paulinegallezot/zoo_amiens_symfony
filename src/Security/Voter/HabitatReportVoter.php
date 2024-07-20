@@ -36,7 +36,7 @@ class HabitatReportVoter extends Voter
         }
 
         /** @var HabitatReport $medicalReport */
-        $medicalReport = $subject;
+        $habitatReport = $subject;
 
         switch ($attribute) {
             case self::EDIT:
@@ -49,7 +49,7 @@ class HabitatReportVoter extends Voter
 
     private function canEditOrDelete(HabitatReport $habitatReport, User $user): bool
     {
-        return $medicalReport->getUser() === $user || $this->security->isGranted('ROLE_ADMIN');
+        return $habitatReport->getUser() === $user || $this->security->isGranted('ROLE_ADMIN');
     }
 }
 

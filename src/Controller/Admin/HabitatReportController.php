@@ -50,7 +50,7 @@ class HabitatReportController extends AdminLayoutController
 
     #[Route('/admin/habitat_report/edit/{id}', name: 'app_admin_habitat_report_edit', methods: ['GET', 'POST'])]
     #[IsGranted('edit', subject: 'habitatReport')]
-    public function edit(string $id, Request $request,HabitatReport $HabitatReport): Response
+    public function edit(string $id, Request $request,HabitatReport $habitatReport): Response
     {
         return $this->editCRUD($id, $request);
     }
@@ -58,7 +58,7 @@ class HabitatReportController extends AdminLayoutController
     // on modifie la route pour ajouter le paramètre id pour que le Voter fonctionne correctement !!
     #[Route('/admin/habitat_report/ajax_delete/{id}', name: 'ajax_habitat_report_delete', methods: ['POST'])]
     #[IsGranted('ajaxDelete', subject: 'habitatReport')]
-    public function ajaxDelete(Request $request,HabitatReport $HabitatReport): Response
+    public function ajaxDelete(Request $request,HabitatReport $habitatReport): Response
     {
         return $this->ajaxDeleteCRUD($request);
     }
