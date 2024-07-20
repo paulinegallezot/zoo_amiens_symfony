@@ -5,6 +5,6 @@
     {% if button_save_and_continue is defined and button_save_and_continue is not empty %}
         <button class="btn btn-secondary m-1" name="save_and_continue">{{ button_save_and_continue }}</button>
     {% endif %}
-    <a href="{{ path('app_admin_review') }}" class="btn btn-secondary m-1">Retour</a>
+    <a href="{{ path('app_admin_review_index') }}" class="btn btn-secondary m-1">Retour</a>
 </div>
 {{ form_end(form) }}

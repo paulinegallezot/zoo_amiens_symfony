@@ -20,7 +20,7 @@ class ReviewController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/review', name: 'app_admin_review')]
+    #[Route('/admin/review', name: 'app_admin_review_index')]
     public function index(): Response
     {
         $this->theme->addJavascriptFile('https://npmcdn.com/flatpickr@4.6.13/dist/l10n/fr.js');

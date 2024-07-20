@@ -23,7 +23,7 @@ class HabitatReportController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/habitat_report', name: 'app_admin_habitat_report')]
+    #[Route('/admin/habitat_report', name: 'app_admin_habitat_report_index')]
     #[IsGranted(new Expression(RoleExpressions::ADMIN_OR_VETO))]
     public function index(HabitatRepository $habitatRepository,UserRepository $userRepository): Response
     {

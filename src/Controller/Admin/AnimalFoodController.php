@@ -24,7 +24,7 @@ class AnimalFoodController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/animal_food', name: 'app_admin_animal_food')]
+    #[Route('/admin/animal_food', name: 'app_admin_animal_food_index')]
     #[IsGranted(new Expression(RoleExpressions::ALL))]
     public function index(AnimalRepository $animalRepository,FoodRepository $foodRepository, UserRepository $userRepository): Response
     {

@@ -20,8 +20,8 @@
 
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYE') or is_granted('ROLE_VETO') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_food') }}"
-                       href="{{ path('app_admin_animal_food') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_food_index') }}"
+                       href="{{ path('app_admin_animal_food_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Rapport alimentation</span>
                     </a>
@@ -30,8 +30,8 @@
 
            {# {% if  is_granted('ROLE_VETO') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}"
-                       href="{{ path('app_admin_animal') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_index') }}"
+                       href="{{ path('app_admin_animal_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Rapport alimentation(2)</span>
                     </a>
@@ -40,8 +40,8 @@
 
             {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_VETO') or is_granted('ROLE_EMPLOYE') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_medical_report') }}"
-                       href="{{ path('app_admin_medical_report') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_medical_report_index') }}"
+                       href="{{ path('app_admin_medical_report_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Rapports médicaux</span>
                     </a>
@@ -50,8 +50,8 @@
 
             {% if is_granted('ROLE_ADMIN')  or is_granted('ROLE_VETO') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat_report') }}"
-                       href="{{ path('app_admin_habitat_report') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat_report_index') }}"
+                       href="{{ path('app_admin_habitat_report_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Rapports sur les habitats</span>
                     </a>
@@ -60,8 +60,8 @@
 
             {% if is_granted('ROLE_ADMIN') %}
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_user') }}"
-                       href="{{ path('app_admin_user') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_user_index') }}"
+                       href="{{ path('app_admin_user_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Utilisateurs</span>
                     </a>
@@ -76,40 +76,40 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal') }}"
-                       href="{{ path('app_admin_animal') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_animal_index') }}"
+                       href="{{ path('app_admin_animal_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Animaux</span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_food') }}"
-                       href="{{ path('app_admin_food') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_food_index') }}"
+                       href="{{ path('app_admin_food_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Aliments </span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_race') }}"
-                       href="{{ path('app_admin_race') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_race_index') }}"
+                       href="{{ path('app_admin_race_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Races</span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat') }}"
-                       href="{{ path('app_admin_habitat') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_habitat_index') }}"
+                       href="{{ path('app_admin_habitat_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Habitats</span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_health_status') }}"
-                       href="{{ path('app_admin_health_status') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_health_status_index') }}"
+                       href="{{ path('app_admin_health_status_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Etats de santés</span>
                     </a>
@@ -124,16 +124,16 @@
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_review') }}"
-                       href="{{ path('app_admin_review') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_review_index') }}"
+                       href="{{ path('app_admin_review_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Avis visiteurs</span>
                     </a>
                 </div>
 
                 <div class="menu-item">
-                    <a class="menu-link {{ is_current_route_return_active('app_admin_service') }}"
-                       href="{{ path('app_admin_service') }}">
+                    <a class="menu-link {{ is_current_route_return_active('app_admin_service_index') }}"
+                       href="{{ path('app_admin_service_index') }}">
                         <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
                         <span class="menu-title">Services du zoo</span>
                     </a>
