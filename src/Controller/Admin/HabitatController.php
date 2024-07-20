@@ -22,7 +22,7 @@ class HabitatController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/habitat', name: 'app_admin_habitat')]
+    #[Route('/admin/habitat', name: 'app_admin_habitat_index')]
     public function index(): Response
     {
         return parent::indexCRUD();

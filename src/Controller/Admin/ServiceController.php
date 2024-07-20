@@ -20,7 +20,7 @@ class ServiceController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/service', name: 'app_admin_service')]
+    #[Route('/admin/service', name: 'app_admin_service_index')]
     public function index(): Response
     {
         return parent::indexCRUD();

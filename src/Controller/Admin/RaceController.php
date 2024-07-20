@@ -19,7 +19,7 @@ class RaceController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/race', name: 'app_admin_race')]
+    #[Route('/admin/race', name: 'app_admin_race_index')]
     public function index(): Response
     {
         return parent::indexCRUD();

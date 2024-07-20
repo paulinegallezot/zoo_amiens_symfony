@@ -57,7 +57,7 @@ class AnimalController extends AdminLayoutController
     }
 
 
-    #[Route('/admin/animal', name: 'app_admin_animal')]
+    #[Route('/admin/animal', name: 'app_admin_animal_index')]
     public function index( RaceRepository $raceRepository,HabitatRepository $habitatRepository): Response
     {
         $races = $raceRepository->findBy([], ['name' => 'ASC']);

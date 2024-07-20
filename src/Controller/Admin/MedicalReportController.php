@@ -23,7 +23,7 @@ class MedicalReportController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/medical_report', name: 'app_admin_medical_report')]
+    #[Route('/admin/medical_report', name: 'app_admin_medical_report_index')]
     #[IsGranted(new Expression(RoleExpressions::ALL))]
     public function index(AnimalRepository $animalRepository,UserRepository $userRepository): Response
     {

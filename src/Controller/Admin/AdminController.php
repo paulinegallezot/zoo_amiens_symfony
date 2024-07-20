@@ -15,7 +15,7 @@ class AdminController extends AdminLayoutController
 
 
 
-    #[Route('/admin', name: 'app_admin')]
+    #[Route('/admin', name: 'app_admin_index')]
     public function index( Security $security,AnimalVisitCounterService $animalVisitCounterService): Response
     {
         $user = $security->getUser();

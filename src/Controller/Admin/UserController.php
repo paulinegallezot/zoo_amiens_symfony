@@ -28,7 +28,7 @@ class UserController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/user', name: 'app_admin_user')]
+    #[Route('/admin/user', name: 'app_admin_user_index')]
     public function index(): Response
     {
 

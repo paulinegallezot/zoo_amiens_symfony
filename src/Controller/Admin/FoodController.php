@@ -17,7 +17,7 @@ class FoodController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/food', name: 'app_admin_food')]
+    #[Route('/admin/food', name: 'app_admin_food_index')]
     public function index(): Response
     {
         return parent::indexCRUD();

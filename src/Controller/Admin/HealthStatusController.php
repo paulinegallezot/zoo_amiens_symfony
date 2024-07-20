@@ -18,7 +18,7 @@ class HealthStatusController extends AdminLayoutController
     protected string $render = 'global';
 
 
-    #[Route('/admin/health_status', name: 'app_admin_health_status')]
+    #[Route('/admin/health_status', name: 'app_admin_health_status_index')]
     public function index(): Response
     {
         return parent::indexCRUD();
