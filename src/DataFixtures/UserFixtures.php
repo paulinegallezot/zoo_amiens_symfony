@@ -20,14 +20,14 @@ class UserFixtures extends Fixture
     public function load(ObjectManager $manager)
     {
         $users = [
-            ['Garcia', 'José', 'jose.garcia@exemple.net', 'garciajose', ['ROLE_ADMIN']],
+            ['Garcia', 'José', 'jose.garcia@exemple.net', 'garciajose152', ['ROLE_ADMIN']],
             ['Dupont', 'Marie', 'marie.dupont@exemple.net', 'dupontmarie', ['ROLE_VETO']],
             ['Bernard', 'Luc', 'luc.bernard@exemple.net', 'bernardluc', ['ROLE_VETO']],
             ['Lefèvre', 'Sophie', 'sophie.lefevre@exemple.net', 'lefevresophie', ['ROLE_VETO']],
             ['Martin', 'Jean', 'jean.martin@exemple.net', 'martinjean', ['ROLE_VETO']],
-            ['Petit', 'Claire', 'claire.petit@exemple.net', 'petitclaire', ['ROLE_VETO']],
+            ['Petit', 'Claire', 'claire.petit@exemple.net', 'petitclaire11', ['ROLE_VETO']],
             ['Moreau', 'Thomas', 'thomas.moreau@exemple.net', 'moreauthomas', ['ROLE_EMPLOYE']],
-            ['Dubois', 'Julie', 'julie.dubois@exemple.net', 'duboisjulie', ['ROLE_EMPLOYE']],
+            ['Dubois', 'Julie', 'julie.dubois@exemple.net', 'duboisjulie125', ['ROLE_EMPLOYE']],
             ['Lemoine', 'Paul', 'paul.lemoine@exemple.net', 'lemoinepaul', ['ROLE_EMPLOYE']],
             ['Renard', 'Élise', 'elise.renard@exemple.net', 'renardelise', ['ROLE_EMPLOYE']],
         ];

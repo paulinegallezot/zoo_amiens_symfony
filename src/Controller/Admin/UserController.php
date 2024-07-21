@@ -59,7 +59,7 @@ class UserController extends AdminLayoutController
             $this->addFlash('success', 'Utilisateur ajouté avec succès.');
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_user', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
 
             }else{
                 return $this->redirectToRoute('app_admin_user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
@@ -95,7 +95,7 @@ class UserController extends AdminLayoutController
 
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_user', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_user_index', [], Response::HTTP_SEE_OTHER);
             }
             // On redirige dans ce cas pour eviter l'affiche du mot de passe.
             return $this->redirectToRoute('app_admin_user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);

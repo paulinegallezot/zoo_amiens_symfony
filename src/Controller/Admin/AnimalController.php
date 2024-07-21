@@ -89,7 +89,7 @@ class AnimalController extends AdminLayoutController
             $this->addFlash('success', 'Animal ajouté avec succès.');
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_animal', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_animal_index', [], Response::HTTP_SEE_OTHER);
 
             }else{
                 return $this->redirectToRoute('app_admin_animal_edit', ['id' => $animal->getId()], Response::HTTP_SEE_OTHER);
@@ -133,7 +133,7 @@ class AnimalController extends AdminLayoutController
             $this->addFlash('success', 'Animal modifié avec succès.');
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_animal', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_animal_index', [], Response::HTTP_SEE_OTHER);
 
             }
         }

@@ -45,7 +45,7 @@ class HabitatController extends AdminLayoutController
             $this->addFlash('success', 'Habitat ajouté avec succès.');
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_habitat', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_habitat_index', [], Response::HTTP_SEE_OTHER);
 
             }else{
                 return $this->redirectToRoute('app_admin_habitat_edit', ['id' => $habitat->getId()], Response::HTTP_SEE_OTHER);
@@ -88,7 +88,7 @@ class HabitatController extends AdminLayoutController
             $this->addFlash('success', 'Habitat modifié avec succès.');
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_habitat', [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_habitat_index', [], Response::HTTP_SEE_OTHER);
 
             }
         }
