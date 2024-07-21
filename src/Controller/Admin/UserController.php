@@ -128,7 +128,7 @@ class UserController extends AdminLayoutController
         $eventDispatcher->dispatch($event, 'security.interactive_login');
 
         // Redirection vers la page d'accueil de l'admin ou une autre page après la connexion
-        return $this->redirectToRoute('app_admin');
+        return $this->redirectToRoute('app_admin_index');
     }
 
 

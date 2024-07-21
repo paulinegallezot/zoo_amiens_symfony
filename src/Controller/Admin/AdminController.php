@@ -12,9 +12,13 @@ class AdminController extends AdminLayoutController
 {
     protected string $entityTitle = 'Dashboard';
 
+    #[Route('/', name: 'index')]
+    public function die( ): Response
+    {
 
+        return new Response("What are you doing here?");
 
-
+    }
     #[Route('/admin', name: 'app_admin_index')]
     public function index( Security $security,AnimalVisitCounterService $animalVisitCounterService): Response
     {

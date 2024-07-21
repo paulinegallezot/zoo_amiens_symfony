@@ -18,6 +18,14 @@
                 <!--end:Menu content-->
             </div>
 
+            <div class="menu-item">
+                <a class="menu-link "
+                   href="/">
+                    <span class="menu-icon">{{ theme.getIcon('address-book', 'fs-2') | raw }}</span>
+                    <span class="menu-title">Dashboard</span>
+                </a>
+            </div>
+
             {% if is_granted('ROLE_ADMIN') or is_granted('ROLE_EMPLOYE') or is_granted('ROLE_VETO') %}
                 <div class="menu-item">
                     <a class="menu-link {{ is_current_route_return_active('app_admin_animal_food_index') }}"
@@ -163,7 +171,7 @@
             <!--begin:Menu item-->
             <div class="menu-item">
 
-                <a class="menu-link" href="#">
+                <a class="menu-link" href="{{ path('generate_doc') }}">
                     <span class="menu-icon">{{ theme.getIcon('abstract-26', 'fs-2') | raw }}</span>
                     <span class="menu-title">Documentation</span>
                 </a>

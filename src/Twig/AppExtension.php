@@ -6,13 +6,16 @@ use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Filesystem\Filesystem;
+use Symfony\Component\Filesystem\Exception\IOExceptionInterface;
 
 class AppExtension extends AbstractExtension
 {
 
 
-    public function __construct(private readonly RequestStack $requestStack, private Security $security)
+    public function __construct(private readonly RequestStack $requestStack, private Security $security, private Filesystem $filesystem)
     {
+
 
     }
     public function getFunctions(): array
@@ -20,8 +23,37 @@ class AppExtension extends AbstractExtension
         return [
             new TwigFunction('is_current_route_return_active', [$this, 'isCurrentRouteReturnActive']),
             new TwigFunction('current_user', [$this, 'getCurrentUser']),
+            new TwigFunction('view_documentation', [$this, 'viewDocumentation']),
         ];
     }
+    public function viewDocumentation(){
+        // je veux ici avoir le role de l'utilisateur connecté et la route actuelle
+        $user = $this->security->getUser();
+        $role = $user ? $user->getRoles()[0] : 'guest'; // Utilisez le premier rôle ou 'guest' si aucun rôle n'est trouvé
+
+        $currentRoute = str_replace('app_admin_','',$this->requestStack->getCurrentRequest()->attributes->get('_route'));
+
+        // Extraire l'entité et l'action de la route
+        $routeParts = explode('_', $currentRoute);
+
+        $action = $routeParts[count($routeParts)-1] ?? 'index';
+        $entity=str_replace('_'.$action,'',$currentRoute);
+
+
+
+        $templatePath =  sprintf('doc/%s/%s_%s.html.twig', $entity, $role, $action);
+
+        $templateFullPath = __DIR__ . '/../../templates/' . $templatePath;
+        //dd($templateFullPath);
+        // Vérifie si le fichier existe
+        if (!$this->filesystem->exists($templateFullPath)) {
+            // Retourne un template par défaut si le fichier n'existe pas
+            $templatePath = 'doc/default.html.twig';
+        }
+
+        return $templatePath;
+    }
+
     public function isCurrentRouteReturnActive(string $route): string
     {
        /* Pour le menu _menu.html.twig, nous avons besoin de savoir si la route actuelle est celle du lien du menu.*/

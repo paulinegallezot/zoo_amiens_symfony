@@ -1,0 +1,14 @@
+{% extends 'metronic/layout/_default.html.twig' %}
+
+
+
+{% block content %}
+    {% for doc in docs %}
+        <div class="doc-section">
+            <h2>{{ doc.path }}</h2>
+            <div class="doc-content">
+                {{ doc.content|raw }}
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
