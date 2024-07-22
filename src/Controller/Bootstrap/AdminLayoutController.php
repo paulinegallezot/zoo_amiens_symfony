@@ -92,7 +92,7 @@ abstract class AdminLayoutController extends AbstractController
             $this->addFlash('success', "{$this->entityTitleSingular} ajouté".$this->getGender()." avec succès.");
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute("app_admin_{$entityNameLower}", [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute("app_admin_{$entityNameLower}_index", [], Response::HTTP_SEE_OTHER);
             } else {
                 return $this->redirectToRoute("app_admin_{$entityNameLower}_edit", ['id' => $entity->getId()], Response::HTTP_SEE_OTHER);
             }
@@ -127,7 +127,7 @@ abstract class AdminLayoutController extends AbstractController
             $this->addFlash('success', "{$this->entityTitleSingular} mise à jour avec succès.");
 
             if ($request->request->has('save_and_exit')) {
-                return $this->redirectToRoute('app_admin_' . $entityNameLower, [], Response::HTTP_SEE_OTHER);
+                return $this->redirectToRoute('app_admin_' . $entityNameLower.'_index', [], Response::HTTP_SEE_OTHER);
             } else {
                 return $this->redirectToRoute('app_admin_' . $entityNameLower . '_edit', ['id' => $entity->getId()], Response::HTTP_SEE_OTHER);
             }
